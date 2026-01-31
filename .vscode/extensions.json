@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "infeng.vscode-react-typescript",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
