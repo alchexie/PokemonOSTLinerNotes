@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { ContentGroup } from '../types';
+import { TITLE } from '../data';
 
 export default function SideNav({
   groups,
@@ -12,17 +13,19 @@ export default function SideNav({
 
   return (
     <aside>
-      <ul>
+      <h1>{TITLE}</h1>
+      <button>☰</button>
+      <nav>
         {groups.map((g) => (
-          <li
+          <a
             key={g.key}
             className={g.key === current?.key ? 'active' : ''}
             onClick={() => navigate(`/docs/${g.key}`)}
           >
             {g.title}
-          </li>
+          </a>
         ))}
-      </ul>
+      </nav>
     </aside>
   );
 }

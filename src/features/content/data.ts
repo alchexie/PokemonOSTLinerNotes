@@ -37,6 +37,7 @@ const createContent = (): ContentGroup[] => {
     return {
       key: folder,
       title: groupMeta?.title ?? folder,
+      meta: groupMeta,
       load: async () => {
         if (cache) {
           return cache;
@@ -46,15 +47,18 @@ const createContent = (): ContentGroup[] => {
         for (const path of paths) {
           const [, section, filename] = path.split('/docs/')[1].split('/');
 
-          const current = sectionMap.get(section) ?? {
-            key: section,
-            title: section.replace(/^\d+-/, ''),
-            files: [],
-          };
+          const current =
+            sectionMap.get(section) ??
+            ({
+              key: section,
+              title: section.replace(/^\d+-/, ''),
+              files: [],
+            } as ContentSection);
           const metaPath = path.replace(/\/[^/]+\.md$/, '/_meta.json');
           if (sectionMetaModules[metaPath]) {
             const meta = await sectionMetaModules[metaPath]();
             current.title = meta.title;
+            current.meta = meta;
           }
 
           const raw = await mdModules[path]();
@@ -77,3 +81,5 @@ const createContent = (): ContentGroup[] => {
 };
 
 export const CONTENT: ContentGroup[] = createContent();
+
+export const TITLE: string = 'Pokemon OST Liner Notes';
