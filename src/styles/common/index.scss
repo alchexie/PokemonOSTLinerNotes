@@ -1,0 +1,61 @@
+@forward './side-nav';
+
+#main {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  > aside {
+    width: 200px;
+    border-right: 2px solid var(--nav-active-text-color);
+    padding: 1rem;
+    overflow: auto;
+    background-color: var(--nav-bg-color);
+    color: var(--nav-text-color);
+  }
+
+  > article {
+    flex: 1;
+    overflow: auto;
+    padding: 3rem;
+  }
+}
+
+#btn-theme {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 10px #606060;
+}
+
+@media (max-width: 767px) {
+  #main {
+    display: block;
+    overflow: auto;
+
+    > aside {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border: none;
+      padding: 0;
+    }
+
+    > article {
+      margin-top: 3rem;
+      padding: 2rem;
+    }
+  }
+
+  #btn-theme {
+    left: auto;
+    right: 2rem;
+    bottom: 2rem;
+  }
+}

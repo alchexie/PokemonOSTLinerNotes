@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CONTENT } from './data';
+import { CONTENT, TITLE } from './data';
 import type { ContentSection } from './types';
 import SideNav from './components/SideNav';
 import DocViewer from './components/DocViewer';
@@ -31,11 +31,12 @@ export default function DocLayout() {
     current.load().then((data) => {
       setSections(data);
       setLoading(false);
+      document.title = `${current.title} - ${TITLE}`
     });
   }, [current]);
 
   return (
-    <main>
+    <main id="main">
       <SideNav groups={groups} current={current} />
       <DocViewer loading={loading} sections={sections}></DocViewer>
     </main>
