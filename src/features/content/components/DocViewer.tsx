@@ -9,6 +9,10 @@ export default function DocViewer({
   loading: boolean;
   sections: ContentSection[];
 }) {
+  const manageContent = (content: string): string => {
+    return content.replace(/\*\*([\s\S]*?)\*\*/g, (m) => m.replace(/ \| /g, '\n'));
+  };
+
   return (
     <article id="doc-viewer">
       {loading && <div>Loading...</div>}
@@ -19,7 +23,7 @@ export default function DocViewer({
             {section.files.map((file) => (
               <React.Fragment key={file.key}>
                 <h3 id={file.key}>{file.title}</h3>
-                <ReactMarkdown>{file.content}</ReactMarkdown>
+                <ReactMarkdown>{manageContent(file.content)}</ReactMarkdown>
               </React.Fragment>
             ))}
           </section>
