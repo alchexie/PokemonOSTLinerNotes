@@ -52,19 +52,23 @@ const createContent = (): ContentGroup[] => {
             ({
               key: section,
               title: section.replace(/^\d+-/, ''),
+              meta: {} as ContentMeta,
               files: [],
             } as ContentSection);
           const metaPath = path.replace(/\/[^/]+\.md$/, '/_meta.json');
           if (sectionMetaModules[metaPath]) {
-            const meta = await sectionMetaModules[metaPath]();
+            const { default: meta } = await sectionMetaModules[metaPath]();
             current.title = meta.title;
             current.meta = meta;
           }
 
           const raw = await mdModules[path]();
           const { attributes, body } = fm<ContentMeta>(raw);
+          const strKey = filename.replace(/\.md$/, '');
           current.files.push({
-            title: attributes.title || filename.replace(/^\d+-/, '').replace(/\.md$/, ''),
+            key: strKey,
+            title: attributes.title || strKey.replace(/^\d+-/, ''),
+            meta: attributes,
             content: body,
           });
           sectionMap.set(section, current);

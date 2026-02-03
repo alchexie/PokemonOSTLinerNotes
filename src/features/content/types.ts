@@ -3,7 +3,7 @@ export interface ContentMeta extends Record<string, string> {
 }
 
 export type MdLoader = () => Promise<string>;
-export type MetaLoader = () => Promise<ContentMeta>;
+export type MetaLoader = () => Promise<{ default: ContentMeta }>;
 
 export interface ContentGroup {
   key: string;
@@ -15,9 +15,11 @@ export interface ContentGroup {
 export interface ContentSection {
   key: string;
   title: string;
-  meta?: ContentMeta;
+  meta: ContentMeta;
   files: {
+    key: string;
     title: string;
+    meta: ContentMeta;
     content: string;
   }[];
 }
