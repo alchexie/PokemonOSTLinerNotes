@@ -5,14 +5,15 @@
       margin: 0 0 1rem;
       padding: 0.5em 0;
       color: var(--nav-active-text-color);
-      font-size: 1.3em;
+      font-size: 1.5em;
       text-align: center;
     }
 
     nav {
+      margin-top: 2rem;
+
       a {
         display: block;
-        margin: 0;
         padding: 0.25rem 1rem;
         cursor: pointer;
 
@@ -36,10 +37,12 @@
         margin: 0;
         padding: 0.5em 1em;
         text-align: left;
+        font-size: 1.2em;
       }
 
       nav {
-        border-bottom: 1px solid var(--nav-text-color);
+        margin-top: 0;
+        border-bottom: 1px solid var(--nav-active-text-color);
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;

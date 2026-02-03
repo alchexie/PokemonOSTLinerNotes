@@ -10,15 +10,15 @@ export default function DocViewer({
   sections: ContentSection[];
 }) {
   return (
-    <article>
+    <article id="doc-viewer">
       {loading && <div>Loading...</div>}
       {!loading &&
         sections.map((section) => (
           <section key={section.key}>
-            <h2>{section.title}</h2>
+            <h2 id={section.key}>{section.title}</h2>
             {section.files.map((file) => (
-              <React.Fragment key={file.title}>
-                <h3>{file.title}</h3>
+              <React.Fragment key={file.key}>
+                <h3 id={file.key}>{file.title}</h3>
                 <ReactMarkdown>{file.content}</ReactMarkdown>
               </React.Fragment>
             ))}

@@ -1,0 +1,49 @@
+#doc-viewer {
+  h3:not(h2 + h3) {
+    margin-top: 3em;
+  }
+
+  p {
+    line-height: 1.7em;
+
+    strong {
+      position: relative;
+      display: inline-block;
+      color: var(--nav-active-text-color);
+      cursor: pointer;
+
+      em {
+        position: absolute;
+        left: 0;
+        top: -120%;
+        border: 1px solid var(--nav-active-text-color);
+        padding: 0 1em;
+        border-radius: 0.5em;
+        background-color: var(--nav-bg-color);
+        opacity: 0;
+        font-weight: normal;
+        font-size: 0.9em;
+        white-space: nowrap;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover,
+      &:focus {
+        em {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  blockquote {
+    margin-left: 0;
+    border-left: 5px solid var(--nav-active-text-color);
+    padding-left: 1em;
+    opacity: 0.5;
+
+    > p {
+      margin: 0.5em 0;
+    }
+  }
+}
