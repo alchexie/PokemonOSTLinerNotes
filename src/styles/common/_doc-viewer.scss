@@ -14,8 +14,11 @@
 
       em {
         position: absolute;
-        left: 0;
-        top: -120%;
+        top: 100%;
+        left: -2rem;
+        z-index: 9;
+        max-height: 0;
+        overflow: hidden;
         border: 1px solid var(--nav-active-text-color);
         padding: 0 1em;
         border-radius: 0.5em;
@@ -23,14 +26,17 @@
         opacity: 0;
         font-weight: normal;
         font-size: 0.9em;
-        white-space: nowrap;
-        transition: opacity 0.3s ease;
+        white-space: pre;
+        transition:
+          opacity 0.3s ease,
+          max-height 0.3s ease;
       }
 
       &:hover,
       &:focus {
         em {
           opacity: 1;
+          max-height: 999px;
         }
       }
     }
