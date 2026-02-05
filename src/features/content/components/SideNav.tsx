@@ -12,7 +12,7 @@ export default function SideNav({
   const navigate = useNavigate();
 
   return (
-    <aside>
+    <aside id="side-nav">
       <h1>{TITLE}</h1>
       <button>☰</button>
       <nav>

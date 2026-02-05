@@ -1,0 +1,47 @@
+#meta-info {
+  width: 300px !important;
+  padding-top: 3rem !important;
+
+  img {
+    display: block;
+    margin: 1rem auto 1rem;
+
+    + span {
+      display: block;
+      color: var(--nav-active-text-color);
+      text-align: center;
+      text-decoration: none;
+    }
+  }
+
+  table {
+    margin: 1rem 0;
+
+    td {
+      font-size: small;
+    }
+
+    + div {
+      display: flex;
+
+      > a {
+        flex: 1;
+        display: block;
+        margin: 0 0.5rem;
+        padding: 0.5em 1em;
+        border-radius: 1rem;
+        background-color: var(--nav-active-text-color);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: small;
+      }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  #meta-info {
+    display: none;
+  }
+}

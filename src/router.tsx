@@ -13,6 +13,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/ost',
+    basename: '/pmost',
   }
 );
