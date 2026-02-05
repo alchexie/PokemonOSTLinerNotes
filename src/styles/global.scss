@@ -17,6 +17,11 @@
   --nav-bg-color: #d1e5d9;
   --nav-text-color: #070707;
   --nav-active-text-color: green;
+
+  --scrollbar-size: 8px;
+  --scrollbar-track: #e5f1ec;
+  --scrollbar-thumb: #c7dfd6;
+  --scrollbar-thumb-hover: #a8cbbd;
 }
 
 :root[data-theme='dark'] {
@@ -25,6 +30,10 @@
   --nav-bg-color: #222826;
   --nav-text-color: #cfcfcf;
   --nav-active-text-color: #6cd899;
+
+  --scrollbar-track: #1b1f1d;
+  --scrollbar-thumb: #2b3431;
+  --scrollbar-thumb-hover: #3c4a45;
 }
 
 *,
@@ -54,4 +63,29 @@ button {
   html {
     font-size: 90%;
   }
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }

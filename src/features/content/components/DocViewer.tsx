@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import type { ContentSection } from '../types';
+import { formatMarkdownContent } from '../utils/formatter';
 
 export default function DocViewer({
   loading,
@@ -9,10 +11,6 @@ export default function DocViewer({
   loading: boolean;
   sections: ContentSection[];
 }) {
-  const manageContent = (content: string): string => {
-    return content.replace(/\*\*([\s\S]*?)\*\*/g, (m) => m.replace(/ \| /g, '\n'));
-  };
-
   return (
     <article id="doc-viewer">
       {loading && <div>Loading...</div>}
@@ -23,7 +21,9 @@ export default function DocViewer({
             {section.files.map((file) => (
               <React.Fragment key={file.key}>
                 <h3 id={file.key}>{file.title}</h3>
-                <ReactMarkdown>{manageContent(file.content)}</ReactMarkdown>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                  {formatMarkdownContent(file.content, file.meta.diff_colors)}
+                </ReactMarkdown>
               </React.Fragment>
             ))}
           </section>

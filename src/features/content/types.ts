@@ -3,7 +3,6 @@ export interface ContentMeta extends Record<string, string> {
 }
 
 export type MdLoader = () => Promise<string>;
-export type MetaLoader = () => Promise<{ default: ContentMeta }>;
 
 export interface ContentGroup {
   key: string;

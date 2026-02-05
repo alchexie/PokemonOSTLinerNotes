@@ -4,6 +4,7 @@ import { CONTENT, TITLE } from './data';
 import type { ContentSection } from './types';
 import SideNav from './components/SideNav';
 import DocViewer from './components/DocViewer';
+import MetaInfo from './components/MetaInfo';
 
 export default function DocLayout() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function DocLayout() {
     current.load().then((data) => {
       setSections(data);
       setLoading(false);
-      document.title = `${current.title} - ${TITLE}`
+      document.title = `${current.title} - ${TITLE}`;
     });
   }, [current]);
 
@@ -39,6 +40,7 @@ export default function DocLayout() {
     <main id="main">
       <SideNav groups={groups} current={current} />
       <DocViewer loading={loading} sections={sections}></DocViewer>
+      <MetaInfo current={current}></MetaInfo>
     </main>
   );
 }
