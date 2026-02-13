@@ -29,11 +29,9 @@ export default function DocLayout() {
       return;
     }
     setLoading(true);
-    current.load().then((data) => {
-      setSections(data);
-      setLoading(false);
-      document.title = `${current.title} - ${TITLE}`;
-    });
+    setSections(current.sections);
+    document.title = `${current.title} - ${TITLE}`;
+    setLoading(false);
   }, [current]);
 
   return (

@@ -1,11 +1,12 @@
 import fm from 'front-matter';
-import type { ContentGroup, MdLoader, ContentSection, ContentMeta } from './types';
+import type { ContentGroup, ContentSection, ContentMeta } from './types';
 
 const createContent = (): ContentGroup[] => {
   const mdModules = import.meta.glob('/docs/**/*.md', {
+    eager: true,
     query: '?raw',
     import: 'default',
-  }) as Record<string, MdLoader>;
+  }) as Record<string, string>;
   const sectionMetaModules = import.meta.glob('/docs/**/_meta.json', {
     eager: true,
     import: 'default',
@@ -27,55 +28,49 @@ const createContent = (): ContentGroup[] => {
   const groups: ContentGroup[] = [...groupMap.entries()].map(([folder, paths]) => {
     const groupMetaPath = `/docs/${folder}/_meta.json`;
     const groupMeta = groupMetaModules[groupMetaPath];
-    let cache: ContentSection[];
+    const sectionMap: Map<string, ContentSection> = new Map<string, ContentSection>();
+
+    for (const path of paths) {
+      let [, section, filename] = path.split('/docs/')[1].split('/');
+
+      if (!filename) {
+        [section, filename] = ['', section];
+      }
+
+      const current =
+        sectionMap.get(section) ??
+        ({
+          key: section,
+          title: section.replace(/^\d+-/, ''),
+          meta: {} as ContentMeta,
+          files: [],
+        } as ContentSection);
+
+      const metaPath = path.replace(/\/[^/]+\.md$/, '/_meta.json');
+      if (sectionMetaModules[metaPath]) {
+        const meta = sectionMetaModules[metaPath];
+        current.title = meta.title;
+        current.meta = meta;
+      }
+
+      const raw = mdModules[path];
+      const { attributes, body } = fm<ContentMeta>(raw);
+      const strKey = filename.replace(/\.md$/, '');
+      current.files.push({
+        key: strKey,
+        title: attributes.title ?? strKey.replace(/^\d+-/, ''),
+        meta: attributes,
+        content: body,
+      });
+
+      sectionMap.set(section, current);
+    }
 
     return {
       key: folder.split('-').pop()!,
       title: groupMeta?.title ?? folder,
       meta: groupMeta,
-      load: async () => {
-        if (cache) {
-          return cache;
-        }
-
-        const sectionMap: Map<string, ContentSection> = new Map<string, ContentSection>();
-        for (const path of paths) {
-          let [, section, filename] = path.split('/docs/')[1].split('/');
-          if (!filename) {
-            [section, filename] = ['', section];
-          }
-
-          const current =
-            sectionMap.get(section) ??
-            ({
-              key: section,
-              title: section.replace(/^\d+-/, ''),
-              meta: {} as ContentMeta,
-              files: [],
-            } as ContentSection);
-          const metaPath = path.replace(/\/[^/]+\.md$/, '/_meta.json');
-          if (sectionMetaModules[metaPath]) {
-            const meta = sectionMetaModules[metaPath];
-            current.title = meta.title;
-            current.meta = meta;
-          }
-
-          const raw = await mdModules[path]();
-          const { attributes, body } = fm<ContentMeta>(raw);
-          const strKey = filename.replace(/\.md$/, '');
-          current.files.push({
-            key: strKey,
-            title: attributes.title ?? strKey.replace(/^\d+-/, ''),
-            meta: attributes,
-            content: body,
-          });
-          sectionMap.set(section, current);
-        }
-
-        cache = [...sectionMap.values()];
-
-        return cache;
-      },
+      sections: [...sectionMap.values()],
     };
   });
 

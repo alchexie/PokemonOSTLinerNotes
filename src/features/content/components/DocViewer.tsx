@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import type { ContentSection } from '../types';
 import { formatMarkdownContent } from '../utils/formatter';
+import { useHashScroll } from '../hooks/useHashScroll';
+import { useCopyWithSource } from '../hooks/useCopyWithSource';
 
 export default function DocViewer({
   loading,
@@ -11,8 +13,11 @@ export default function DocViewer({
   loading: boolean;
   sections: ContentSection[];
 }) {
+  const articleRef = useCopyWithSource();
+  useHashScroll(sections);
+
   return (
-    <article id="doc-viewer">
+    <article id="doc-viewer" ref={articleRef}>
       {loading && <div>Loading...</div>}
       {!loading &&
         sections.map((section) => (
