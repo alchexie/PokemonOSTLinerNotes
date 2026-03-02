@@ -78,5 +78,3 @@ const createContent = (): ContentGroup[] => {
 };
 
 export const CONTENT: ContentGroup[] = createContent();
-
-export const TITLE: string = 'Pokemon OST Liner Notes';
