@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CONTENT, TITLE } from './data';
+import { CONTENT } from './data';
 import type { ContentSection } from './types';
-import SideNav from './components/SideNav';
 import DocViewer from './components/DocViewer';
 import MetaInfo from './components/MetaInfo';
+import { TITLE } from '../main/data';
 
 export default function DocLayout() {
   const navigate = useNavigate();
@@ -35,10 +35,9 @@ export default function DocLayout() {
   }, [current]);
 
   return (
-    <main id="main">
-      <SideNav groups={groups} current={current} />
+    <>
       <DocViewer loading={loading} sections={sections}></DocViewer>
       <MetaInfo current={current}></MetaInfo>
-    </main>
+    </>
   );
 }
