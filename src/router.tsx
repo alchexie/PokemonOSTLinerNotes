@@ -20,6 +20,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/pmost',
+    basename: import.meta.env.BASE_URL,
   }
 );

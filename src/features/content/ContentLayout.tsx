@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CONTENT } from './data';
-import type { ContentSection } from './types';
 import DocViewer from './components/DocViewer';
 import MetaInfo from './components/MetaInfo';
 import { TITLE } from '../main/data';
@@ -15,9 +14,6 @@ export default function DocLayout() {
     return groups.find((g) => g.key === groupKey) || groups[0];
   }, [groupKey]);
 
-  const [loading, setLoading] = useState(false);
-  const [sections, setSections] = useState<ContentSection[]>([]);
-
   useEffect(() => {
     if (!groupKey && groups.length) {
       navigate(`/docs/${groups[0].key}`, { replace: true });
@@ -28,15 +24,12 @@ export default function DocLayout() {
     if (!current) {
       return;
     }
-    setLoading(true);
-    setSections(current.sections);
     document.title = `${current.title} - ${TITLE}`;
-    setLoading(false);
   }, [current]);
 
   return (
     <>
-      <DocViewer loading={loading} sections={sections}></DocViewer>
+      <DocViewer current={current}></DocViewer>
       <MetaInfo current={current}></MetaInfo>
     </>
   );
