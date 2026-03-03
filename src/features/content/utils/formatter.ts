@@ -30,14 +30,9 @@ const renderPersonColor = (input: string, config: PersonColor[]) => {
   });
 };
 
-const renderTrackInfo = (input: string) => {
-  return input.replace(/\*\*([\s\S]*?)\*\*/g, (m) => m.replace(/ \| /g, '\n'));
-};
-
 export const formatMarkdownContent = (content: string, strDiffColorCfg = '') => {
   if (strDiffColorCfg) {
     content = renderPersonColor(content, parsePersonColor(strDiffColorCfg));
   }
-  content = renderTrackInfo(content);
   return content;
 };

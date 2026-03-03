@@ -16,13 +16,13 @@
     line-height: 1.7em;
 
     strong {
-      &:has(em) {
+      &:has(.track-info) {
         position: relative;
         display: inline-block;
         color: var(--nav-active-text-color);
         cursor: pointer;
 
-        em {
+        .track-info {
           position: absolute;
           top: 100%;
           left: -2rem;
@@ -30,7 +30,7 @@
           max-height: 0;
           overflow: hidden;
           border: 1px solid var(--nav-active-text-color);
-          padding: 0 1em;
+          padding: 0.25em 1em;
           border-radius: 0.5em;
           background-color: var(--nav-bg-color);
           opacity: 0;
@@ -40,11 +40,15 @@
           transition:
             opacity 0.3s ease,
             max-height 0.3s ease;
+
+          > span {
+            display: flex;
+          }
         }
 
         &:hover,
         &:focus {
-          em {
+          .track-info {
             opacity: 1;
             max-height: 999px;
           }
