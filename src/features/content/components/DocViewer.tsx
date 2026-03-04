@@ -5,12 +5,12 @@ import type { ContentGroup } from '../types';
 import { formatMarkdownContent } from '../utils/formatter';
 import { useHashScroll } from '../hooks/useHashScroll';
 import { useCopyWithSource } from '../hooks/useCopyWithSource';
-import { createTrackPopup } from './TrackPopup';
+import createTrackPopupTrigger from '../utils/createTrackPopupTrigger';
 
 export default function DocViewer({ current }: { current: ContentGroup }) {
+  const component = useMemo(() => createTrackPopupTrigger(current), [current]);
   const articleRef = useCopyWithSource();
   useHashScroll(current.sections);
-  const component = useMemo(() => createTrackPopup(current), [current]);
 
   return (
     <article id="doc-viewer" ref={articleRef}>
@@ -20,7 +20,10 @@ export default function DocViewer({ current }: { current: ContentGroup }) {
           {section.files.map((file) => (
             <React.Fragment key={file.key}>
               <h3 id={file.key}>{file.title}</h3>
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={{ em: component }}>
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                components={{ strong: component }}
+              >
                 {formatMarkdownContent(file.content, file.meta.diff_colors)}
               </ReactMarkdown>
             </React.Fragment>
