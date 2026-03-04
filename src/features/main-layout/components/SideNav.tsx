@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TITLE } from '../data';
-import { CONTENT } from '../../content/data';
+import { CONTENT } from '../../content-layout/data';
 
 export default function SideNav() {
   const navigate = useNavigate();

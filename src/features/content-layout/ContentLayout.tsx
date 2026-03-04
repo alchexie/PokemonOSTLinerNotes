@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CONTENT } from './data';
 import DocViewer from './components/DocViewer';
 import MetaInfo from './components/MetaInfo';
-import { TITLE } from '../main/data';
+import { TITLE } from '../main-layout/data';
 
 export default function DocLayout() {
   const navigate = useNavigate();
