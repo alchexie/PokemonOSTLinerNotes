@@ -2,6 +2,7 @@
 @forward './doc-viewer';
 @forward './meta_info';
 @forward './track-popup';
+@forward './audio-player';
 
 #main {
   display: flex;
@@ -9,7 +10,6 @@
   overflow: hidden;
 
   > aside {
-    width: 240px;
     border-right: 2px solid var(--nav-active-text-color);
     padding: 1rem;
     overflow: auto;

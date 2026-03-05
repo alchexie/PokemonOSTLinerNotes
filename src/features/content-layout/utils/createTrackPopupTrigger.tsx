@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import type { ContentGroup } from '../types';
 import TrackPopupTrigger from '../components/TrackPopupTrigger';
 
-interface ReactElementProps {
-  children?: React.ReactNode;
-}
-
 export default function createTrackPopupTrigger(current: ContentGroup) {
-  return function ({ children }: ReactElementProps) {
+  return function ({ children }: { children?: ReactNode }) {
     const [label, em] = React.Children.toArray(children);
     if (
       typeof label === 'string' &&
@@ -19,7 +15,7 @@ export default function createTrackPopupTrigger(current: ContentGroup) {
       const indexes = tokens.map((x) => (/^\d/.test(x) ? `${current.key}-${x}` : x));
 
       return (
-        <TrackPopupTrigger label={label} groupKey={current.key} trackIndexes={indexes} />
+        <TrackPopupTrigger label={label} series={current.key} trackIndexes={indexes} />
       );
     } else {
       return <strong>{children}</strong>;

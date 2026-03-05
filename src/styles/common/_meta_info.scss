@@ -1,5 +1,5 @@
 #meta-info {
-  width: 300px !important;
+  width: var(--meta-info-width);
 
   img {
     display: block;
