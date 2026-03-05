@@ -11,15 +11,17 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 import { useState } from 'react';
+import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
+import type { Audio } from '../../audio-player/types';
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
-  groupKey: string;
+  series: string;
   trackIndexes: string[];
 }
 
 interface TrackPopupProps {
-  groupKey: string;
+  series: string;
   trackIndexes: string[];
   isClosing?: boolean;
 }
@@ -48,7 +50,7 @@ const getPortalContainer = () => {
 
 export default function TrackPopupTrigger({
   label,
-  groupKey,
+  series,
   trackIndexes,
 }: TrackPopupTriggerProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +103,7 @@ export default function TrackPopupTrigger({
             {...getFloatingProps()}
           >
             <TrackPopupContent
-              groupKey={groupKey}
+              series={series}
               trackIndexes={trackIndexes}
               isClosing={isClosing}
             />
@@ -112,29 +114,37 @@ export default function TrackPopupTrigger({
   );
 }
 
-function TrackPopupContent({ groupKey, trackIndexes, isClosing }: TrackPopupProps) {
-  return (
-    <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
-      {trackIndexes.map((index, idx) => {
-        const [key, trackIndex] = index.split('-');
-        const track = trackInfo[key].find((x) =>
-          x.slice(0, 2).includes(trackIndex.replace('+', ''))
-        )!;
+function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps) {
+  const { awake } = useAudioPlayer();
+  const tracks: Audio[] = trackIndexes.map((x) => {
+    const [series, index] = x.split('-');
+    const track = trackInfo[series].find((y) => y.slice(0, 2).includes(index))!;
+    return {
+      series,
+      indexDisc: track[0],
+      indexiTunes: track[1],
+      titleJP: track[2],
+      titleCN: track[3],
+    };
+  });
 
+  return (
+    <div
+      className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}
+      onClick={() => awake(tracks)}
+    >
+      {tracks.map((x, idx) => {
         return (
           <div key={idx}>
-            <span>
-              {`${key === groupKey ? '' : `[${key}]-`}${track[0]} (${track[1]})`}
-              &nbsp;-&nbsp;
+            <span className="track-index">
+              {`${x.series === series ? '' : `[${x.series}]-`}${x.indexDisc} (${x.indexiTunes})`}
             </span>
             <span>
-              <span>{`${track[2]}`}</span>
-              {trackIndex.includes('+') && (
-                <span className="track-title-cn">
-                  <br></br>
-                  {track[3]}
-                </span>
-              )}
+              <span>{`${x.titleJP}`}</span>
+              <span className="track-title-cn">
+                <br></br>
+                <small>{x.titleCN}</small>
+              </span>
             </span>
           </div>
         );

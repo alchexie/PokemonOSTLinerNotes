@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --side-nav-width: 240px;
+  --meta-info-width: 300px;
+
   --bg-color: #e5f1ec;
   --text-color: #000000;
   --nav-bg-color: #d1e5d9;
@@ -22,6 +25,10 @@
   --scrollbar-track: #e5f1ec;
   --scrollbar-thumb: #c7dfd6;
   --scrollbar-thumb-hover: #a8cbbd;
+
+  --player-bg-color: #43a874;
+  --player-border-color: #66c392;
+  --player-text-color: #ffffff;
 }
 
 :root[data-theme='dark'] {
@@ -34,6 +41,10 @@
   --scrollbar-track: #1b1f1d;
   --scrollbar-thumb: #2b3431;
   --scrollbar-thumb-hover: #3c4a45;
+
+  --player-bg-color: #39977f;
+  --player-border-color: #1f5f50;
+  --player-text-color: #dde3e1;
 }
 
 *,

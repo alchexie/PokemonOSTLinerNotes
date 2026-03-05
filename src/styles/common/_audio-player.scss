@@ -1,0 +1,106 @@
+#audio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 48px;
+  border-top: 1px solid var(--player-border-color);
+  padding: 0 4rem;
+  background-color: var(--player-bg-color);
+  opacity: 0.9;
+
+  span {
+    display: block;
+    color: var(--player-text-color);
+    white-space: nowrap;
+  }
+
+  .audio-player-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-right: 8px;
+
+    button {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background-color: transparent;
+      opacity: 0.8;
+      transition:
+        opacity,
+        transform 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+  }
+
+  .audio-player-progress {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+    transform: translateY(2px);
+
+    .audio-player-progress-title {
+      height: 1em;
+      font-size: small;
+      text-indent: 0.5em;
+
+      + div {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .audio-player-progress-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background-color: rgba(#fff, 0.3);
+      cursor: pointer;
+
+      .audio-player-progress-bar-fill {
+        width: 0%;
+        height: 4px;
+        border-radius: 2px;
+        background-color: rgba(#fff, 0.7);
+      }
+
+      .audio-player-progress-bar-trigger {
+        position: absolute;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(#fff, 0.9);
+        box-shadow: 0 0 6px var(--player-bg-color);
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      > div {
+        width: 100%;
+      }
+
+      + span {
+        font-size: 0.8em;
+        margin: 0 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #audio-player {
+    display: none;
+  }
+}
