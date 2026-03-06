@@ -22,7 +22,18 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const methodNames = ['play', 'pause', 'stop', 'prev', 'next', 'seekTo'] as const;
+  const methodNames = [
+    'play',
+    'pause',
+    'stop',
+    'jumpTo',
+    'prev',
+    'next',
+    'seekTo',
+    'toggleMute',
+    'switchMode',
+    'close',
+  ] as const;
   const handlers: AudioPlayerHandlers = {
     awake: (tracks: Audio[], startQueueIndex?: number) => {
       core.awake(tracks, startQueueIndex);

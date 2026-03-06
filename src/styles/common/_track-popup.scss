@@ -1,8 +1,16 @@
 $track-popup-translateX: -1em;
 
 .track-popup-trigger {
+  position: relative;
   color: var(--nav-active-text-color);
   cursor: pointer;
+
+  > .music-icon {
+    position: absolute;
+    top: -0.25em;
+    left: -0.65em;
+    animation: musicIconBounce 1s infinite ease-in-out;
+  }
 }
 
 .track-popup {
@@ -34,10 +42,23 @@ $track-popup-translateX: -1em;
 
     span {
       &.track-index {
+        display: flex;
         color: var(--nav-active-text-color);
         font-weight: bold;
         font-size: 0.7em;
         transform: translateY(0.2em);
+
+        button {
+          width: 24px;
+          height: 24px;
+          border: none;
+          background-color: transparent;
+          transition: transform 0.2s ease;
+
+          &:hover {
+            transform: scale(1.5);
+          }
+        }
       }
 
       &.track-title-cn {
@@ -70,5 +91,34 @@ $track-popup-translateX: -1em;
   to {
     opacity: 0;
     transform: translateX($track-popup-translateX) translateY(-5px);
+  }
+}
+
+@keyframes musicIconBounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  30% {
+    transform: translateY(-0.5em) scale(1.05, 0.95);
+  }
+
+  60% {
+    transform: translateY(0) scale(0.95, 1.05);
+  }
+
+  80% {
+    transform: translateY(-0.2em) scale(1.02, 0.98);
+  }
+}
+
+@media (max-width: 767px) {
+  .track-popup {
+    > div > span {
+      &.track-index {
+        transform: translateY(0);
+      }
+    }
   }
 }

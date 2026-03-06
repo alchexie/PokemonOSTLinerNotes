@@ -12,6 +12,8 @@ export interface AudioPlayerState {
   duration: number;
   currentTime: number;
   paused: boolean;
+  mute: boolean;
+  mode: number;
 }
 
 export interface AudioPlayerHandlers {
@@ -19,9 +21,13 @@ export interface AudioPlayerHandlers {
   play: () => void;
   pause: () => void;
   stop: () => void;
+  jumpTo: (queueIndex: number) => void;
   prev: () => void;
   next: () => void;
   seekTo: (time: number) => void;
+  toggleMute: () => void;
+  switchMode: () => void;
+  close: () => void;
 }
 
 export type AudioPlayerContextProps = AudioPlayerState & AudioPlayerHandlers;

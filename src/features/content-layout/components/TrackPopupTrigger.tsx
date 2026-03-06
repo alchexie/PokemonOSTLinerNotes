@@ -13,6 +13,7 @@ import {
 import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
+import musicSvg from '@/assets/icons/music.svg';
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
@@ -53,6 +54,7 @@ export default function TrackPopupTrigger({
   series,
   trackIndexes,
 }: TrackPopupTriggerProps) {
+  const { queue, currentQueueIndex } = useAudioPlayer();
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -77,7 +79,6 @@ export default function TrackPopupTrigger({
       }
     },
   });
-
   const hover = useHover(context, {
     delay: { open: 0, close: 150 },
     handleClose: safePolygon(),
@@ -87,6 +88,8 @@ export default function TrackPopupTrigger({
   });
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, dismiss]);
 
+  const currentAudio = queue[currentQueueIndex];
+
   return (
     <strong
       ref={refs.setReference}
@@ -94,6 +97,9 @@ export default function TrackPopupTrigger({
       className="track-popup-trigger"
       style={{ display: 'inline-block' }}
     >
+      {trackIndexes.includes(`${currentAudio?.series}-${currentAudio?.indexiTunes}`) && (
+        <img src={musicSvg} className="music-icon hidden-md"></img>
+      )}
       {label}
       {isOpen &&
         createPortal(
@@ -129,15 +135,15 @@ function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps)
   });
 
   return (
-    <div
-      className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}
-      onClick={() => awake(tracks)}
-    >
+    <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
       {tracks.map((x, idx) => {
         return (
           <div key={idx}>
             <span className="track-index">
               {`${x.series === series ? '' : `[${x.series}]-`}${x.indexDisc} (${x.indexiTunes})`}
+              <button onClick={() => awake(tracks, idx)}>
+                <img src={musicSvg} className="music-icon hidden-md"></img>
+              </button>
             </span>
             <span>
               <span>{`${x.titleJP}`}</span>
