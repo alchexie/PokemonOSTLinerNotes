@@ -70,7 +70,6 @@ export default function AudioProgressBar() {
               className="audio-player-progress-bar-fill"
               style={{ width: `${percent}%` }}
             />
-
             <div
               className="audio-player-progress-bar-trigger"
               style={{ left: `${percent}%` }}

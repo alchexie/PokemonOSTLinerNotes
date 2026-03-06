@@ -29,6 +29,13 @@
   --player-bg-color: #43a874;
   --player-border-color: #66c392;
   --player-text-color: #ffffff;
+
+  --playlist-bg-color: #2a2f2d;
+  --playlist-border-color: #2a2f2d;
+  --playlist-scrollbar-size: 2px;
+  --playlist-scrollbar-track: #2a2f2d;
+  --playlist-scrollbar-thumb: #3b403e;
+  --playlist-scrollbar-thumb-hover: #4a504d;
 }
 
 :root[data-theme='dark'] {
@@ -45,6 +52,12 @@
   --player-bg-color: #39977f;
   --player-border-color: #1f5f50;
   --player-text-color: #dde3e1;
+
+  --playlist-bg-color: #222725;
+  --playlist-border-color: #222725;
+  --playlist-scrollbar-track: #222725;
+  --playlist-scrollbar-thumb: #313634;
+  --playlist-scrollbar-thumb-hover: #3f4643;
 }
 
 *,
@@ -99,4 +112,10 @@ button {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@media (max-width: 767px) {
+  .hidden-md {
+    display: none;
+  }
 }

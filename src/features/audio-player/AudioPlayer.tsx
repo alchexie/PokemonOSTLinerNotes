@@ -1,6 +1,7 @@
 import { type JSX } from 'react';
 import { useAudioPlayer } from './hooks/useAudioPlayer';
 import AudioProgressBar from './components/AudioProgressBar';
+import AudioTools from './components/AudioTools';
 
 export function AudioPlayer() {
   const ap = useAudioPlayer();
@@ -11,16 +12,19 @@ export function AudioPlayer() {
 
   return (
     <div id="audio-player">
-      <div className="audio-player-buttons">
-        <IconButton iconName={'prev'}></IconButton>
-        {ap.paused ? (
-          <IconButton iconName={'play'}></IconButton>
-        ) : (
-          <IconButton iconName={'pause'}></IconButton>
-        )}
-        <IconButton iconName={'next'}></IconButton>
+      <div>
+        <div className="audio-player-buttons">
+          <IconButton iconName={'prev'}></IconButton>
+          {ap.paused ? (
+            <IconButton iconName={'play'}></IconButton>
+          ) : (
+            <IconButton iconName={'pause'}></IconButton>
+          )}
+          <IconButton iconName={'next'}></IconButton>
+        </div>
+        <AudioProgressBar></AudioProgressBar>
+        <AudioTools></AudioTools>
       </div>
-      <AudioProgressBar></AudioProgressBar>
     </div>
   );
 }

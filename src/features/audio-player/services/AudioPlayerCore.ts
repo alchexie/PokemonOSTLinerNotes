@@ -13,11 +13,13 @@ export class AudioPlayerCore {
   readonly audio: HTMLAudioElement;
   queue: Audio[];
   currentQueueIndex: number;
+  mode: number = 2;
+  private _handleEnded!: () => void;
 
   private constructor() {
     this.audio = new Audio();
     this.audio.preload = 'metadata';
-    this.audio.addEventListener('ended', () => this.next());
+    this.switchMode();
     this.queue = [];
     this.currentQueueIndex = -1;
   }
@@ -48,21 +50,58 @@ export class AudioPlayerCore {
     this.audio.currentTime = 0;
   }
 
-  prev(): void {
-    this.currentQueueIndex =
-      (this.currentQueueIndex - 1 + this.queue.length) % this.queue.length;
+  jumpTo(queueIndex: number): void {
+    if (queueIndex === this.currentQueueIndex) {
+      return;
+    }
+    this.currentQueueIndex = queueIndex;
     this.load(this.queue[this.currentQueueIndex]);
     this.audio.play();
   }
 
+  prev(): void {
+    this.jumpTo((this.currentQueueIndex - 1 + this.queue.length) % this.queue.length);
+  }
+
   next(): void {
-    this.currentQueueIndex = (this.currentQueueIndex + 1) % this.queue.length;
-    this.load(this.queue[this.currentQueueIndex]);
-    this.audio.play();
+    this.jumpTo((this.currentQueueIndex + 1) % this.queue.length);
   }
 
   seekTo(time: number): void {
     this.audio.currentTime = time;
+  }
+
+  toggleMute() {
+    this.audio.volume = +!this.audio.volume;
+  }
+
+  switchMode() {
+    this.mode = (this.mode + 1) % 3;
+    if (this._handleEnded) {
+      this.audio.removeEventListener('ended', this._handleEnded);
+    }
+    switch (this.mode) {
+      case 0:
+        this._handleEnded = () => {
+          const prevIndex = this.currentQueueIndex;
+          if (prevIndex === this.queue.length - 1) {
+            this.load(this.queue[(this.currentQueueIndex = 0)]);
+          } else {
+            this.next();
+          }
+        };
+        break;
+      case 1:
+        this._handleEnded = () => this.next();
+        break;
+      case 2:
+        this._handleEnded = () => {
+          this.seekTo(0);
+          this.play();
+        };
+        break;
+    }
+    this.audio.addEventListener('ended', this._handleEnded);
   }
 
   getState(): AudioPlayerState {
@@ -72,6 +111,8 @@ export class AudioPlayerCore {
       duration: this.audio.duration || 0,
       currentTime: this.audio.currentTime,
       paused: this.audio.paused,
+      mute: !this.audio.volume,
+      mode: this.mode,
     };
   }
 

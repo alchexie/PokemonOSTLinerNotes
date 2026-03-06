@@ -3,16 +3,23 @@
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
   height: 48px;
   border-top: 1px solid var(--player-border-color);
   padding: 0 4rem;
   background-color: var(--player-bg-color);
   opacity: 0.9;
 
+  > div {
+    display: flex;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
   span {
     display: block;
     color: var(--player-text-color);
+    font-size: 0.8em;
     white-space: nowrap;
   }
 
@@ -47,10 +54,12 @@
     padding: 4px 8px;
     transform: translateY(2px);
 
+    span {
+      margin: 0 8px;
+    }
+
     .audio-player-progress-title {
       height: 1em;
-      font-size: small;
-      text-indent: 0.5em;
 
       + div {
         flex: 1;
@@ -92,9 +101,103 @@
       }
 
       + span {
-        font-size: 0.8em;
-        margin: 0 8px;
+        transform: translateY(-2px);
       }
+    }
+  }
+
+  .audio-player-tools {
+    display: flex;
+    align-items: center;
+
+    button,
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    button {
+      margin: 0 4px;
+      border: none;
+      background-color: transparent;
+
+      &:not(:first-child) {
+        opacity: 0.6;
+      }
+
+      &:hover,
+      &.active {
+        opacity: 1;
+      }
+
+      &.audio-player-tools-volume {
+        &.mute {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    span {
+      margin: 0 4px;
+    }
+  }
+
+  .audio-player-playlist {
+    position: fixed;
+    bottom: 48px;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow-y: auto;
+    background-color: var(--playlist-bg-color);
+    color: var(--text-color);
+    transition: max-height 0.2s ease;
+    scrollbar-width: 2px;
+    scrollbar-color: var(--playlist-scrollbar-thumb) var(--playlist-scrollbar-track);
+
+    > span {
+      width: 100%;
+
+      &:nth-child(odd) {
+        background-color: #303634;
+      }
+
+      > span {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 8rem;
+        color: #bbb;
+        text-align: center;
+        line-height: 2.5em;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--player-bg-color);
+        }
+
+        &.active {
+          color: var(--player-bg-color);
+          font-weight: bold;
+        }
+      }
+    }
+
+    &.active {
+      max-height: 180px;
+      border-top: 1px solid var(--player-bg-color);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--playlist-bg-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--playlist-scrollbar-thumb);
+      border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--playlist-scrollbar-thumb-hover);
     }
   }
 }
