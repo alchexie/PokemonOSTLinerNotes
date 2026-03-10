@@ -14,9 +14,7 @@ export default function createTrackPopupTrigger(current: ContentGroup) {
       const tokens = raw.trim().split(/\s+/);
       const indexes = tokens.map((x) => (/^\d/.test(x) ? `${current.key}-${x}` : x));
 
-      return (
-        <TrackPopupTrigger label={label} series={current.key} trackIndexes={indexes} />
-      );
+      return <TrackPopupTrigger label={label} trackIndexes={indexes} />;
     } else {
       return <strong>{children}</strong>;
     }

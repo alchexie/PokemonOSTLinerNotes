@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 import { formatTime } from '../utils/formatTime';
+import SeriesTag from '../../series-tag/SeriesTag';
 
 export default function AudioProgressBar() {
   const { queue, currentQueueIndex, currentTime, duration, seekTo } = useAudioPlayer();
@@ -57,7 +58,9 @@ export default function AudioProgressBar() {
   return (
     <div className="audio-player-progress">
       <span className="audio-player-progress-title">
-        {currentTrack.titleJP} 【{currentTrack.titleCN}】
+        <SeriesTag type={currentTrack.series}></SeriesTag>
+        &nbsp;
+        <span>{currentTrack.titleJP} 【{currentTrack.titleCN}】</span>
       </span>
       <div>
         <div

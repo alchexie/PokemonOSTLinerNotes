@@ -14,15 +14,15 @@ import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
 import musicIcon from '@/assets/icons/music.svg';
+import SeriesTag from '../../series-tag/SeriesTag';
+import { getOstSeries } from '../../series-tag/utils/getOstSeries';
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
-  series: string;
   trackIndexes: string[];
 }
 
 interface TrackPopupProps {
-  series: string;
   trackIndexes: string[];
   isClosing?: boolean;
 }
@@ -51,7 +51,6 @@ const getPortalContainer = () => {
 
 export default function TrackPopupTrigger({
   label,
-  series,
   trackIndexes,
 }: TrackPopupTriggerProps) {
   const { queue, currentQueueIndex } = useAudioPlayer();
@@ -108,11 +107,7 @@ export default function TrackPopupTrigger({
             style={{ ...floatingStyles, pointerEvents: 'auto' }}
             {...getFloatingProps()}
           >
-            <TrackPopupContent
-              series={series}
-              trackIndexes={trackIndexes}
-              isClosing={isClosing}
-            />
+            <TrackPopupContent trackIndexes={trackIndexes} isClosing={isClosing} />
           </div>,
           getPortalContainer()
         )}
@@ -120,13 +115,14 @@ export default function TrackPopupTrigger({
   );
 }
 
-function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps) {
+function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
   const { queue, currentQueueIndex, awake } = useAudioPlayer();
   const tracks: Audio[] = trackIndexes.map((x) => {
     const [series, index] = x.split('-');
     const track = trackInfo[series].find((y) => y.slice(0, 2).includes(index))!;
     return {
       series,
+      ostSeries: getOstSeries(series),
       indexDisc: track[0],
       indexiTunes: track[1],
       titleJP: track[2],
@@ -141,11 +137,13 @@ function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps)
         return (
           <div key={idx}>
             <span className="track-index">
-              {`${x.series === series ? '' : `[${x.series}]-`}${x.indexDisc} (${x.indexiTunes})`}
+              <span>
+                <SeriesTag type={x.series}></SeriesTag>
+              </span>
               <button className="hidden-md" onClick={() => awake(tracks, idx)}>
                 <img
                   src={musicIcon}
-                  className={`music-icon${currentAudio && currentAudio.series === x.series && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
+                  className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
                 ></img>
               </button>
             </span>

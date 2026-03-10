@@ -1,5 +1,6 @@
 export interface Audio {
   series: string;
+  ostSeries: string;
   indexDisc: string;
   indexiTunes: string;
   titleJP: string;

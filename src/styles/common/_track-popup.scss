@@ -31,25 +31,17 @@ $track-popup-translateX: -1em;
     padding: 0.1em 0;
     white-space: nowrap;
 
-    > span {
-      display: block;
-
-      &:first-child {
-        padding-right: 0.5em;
-      }
-    }
-
     span {
       &.track-index {
         display: flex;
         color: var(--nav-active-text-color);
         font-weight: bold;
-        font-size: 0.7em;
         transform: translateY(0.2em);
 
         button {
           width: 24px;
           height: 24px;
+          margin: 0 0.25em;
           background-color: transparent;
           transition: transform 0.2s ease;
 
