@@ -37,3 +37,12 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  #doc-viewer {
+    h2,
+    h3 {
+      scroll-margin-top: 3.5em;
+    }
+  }
+}

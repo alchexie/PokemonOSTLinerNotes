@@ -10,9 +10,6 @@
   overflow: hidden;
 
   > aside {
-    border-right: 2px solid var(--nav-active-text-color);
-    padding: 1rem;
-    overflow: auto;
     background-color: var(--nav-bg-color);
     color: var(--nav-text-color);
   }
@@ -32,7 +29,6 @@
   left: 2rem;
   width: 36px;
   height: 36px;
-  border: none;
   border-radius: 50%;
   background-color: var(--bg-color);
   box-shadow: 0 0 10px #606060;
@@ -43,16 +39,6 @@
     display: block;
     overflow: auto;
 
-    > aside {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      width: 100%;
-      border: none;
-      padding: 0;
-    }
-
     > article {
       margin-top: 3rem;
       padding: 2rem;
@@ -61,13 +47,35 @@
   }
 
   #btn-theme {
-    left: auto;
-    right: 2rem;
-    bottom: 2rem;
+    width: 48px;
+    height: 48px;
   }
 }
 
 .music-icon {
   width: 24px;
   height: 24px;
+
+  &.active {
+    animation: bounce 1s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+
+    30% {
+      transform: translateY(-0.5em) scale(1.05, 0.95);
+    }
+
+    60% {
+      transform: translateY(0) scale(0.95, 1.05);
+    }
+
+    80% {
+      transform: translateY(-0.2em) scale(1.02, 0.98);
+    }
+  }
 }

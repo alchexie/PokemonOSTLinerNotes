@@ -21,21 +21,10 @@
   --nav-text-color: #070707;
   --nav-active-text-color: green;
 
-  --scrollbar-size: 8px;
-  --scrollbar-track: #e5f1ec;
-  --scrollbar-thumb: #c7dfd6;
-  --scrollbar-thumb-hover: #a8cbbd;
+  --scrollbar-track-color: #e5f1ec;
+  --scrollbar-thumb-color: #c7dfd6;
 
-  --player-bg-color: #43a874;
-  --player-border-color: #66c392;
-  --player-text-color: #ffffff;
-
-  --playlist-bg-color: #2a2f2d;
-  --playlist-border-color: #2a2f2d;
-  --playlist-scrollbar-size: 2px;
-  --playlist-scrollbar-track: #2a2f2d;
-  --playlist-scrollbar-thumb: #3b403e;
-  --playlist-scrollbar-thumb-hover: #4a504d;
+  --player-highlight-color: #43a874;
 }
 
 :root[data-theme='dark'] {
@@ -45,37 +34,31 @@
   --nav-text-color: #cfcfcf;
   --nav-active-text-color: #6cd899;
 
-  --scrollbar-track: #1b1f1d;
-  --scrollbar-thumb: #2b3431;
-  --scrollbar-thumb-hover: #3c4a45;
+  --scrollbar-track-color: #1b1f1d;
+  --scrollbar-thumb-color: #2b3431;
 
-  --player-bg-color: #39977f;
-  --player-border-color: #1f5f50;
-  --player-text-color: #dde3e1;
-
-  --playlist-bg-color: #222725;
-  --playlist-border-color: #222725;
-  --playlist-scrollbar-track: #222725;
-  --playlist-scrollbar-thumb: #313634;
-  --playlist-scrollbar-thumb-hover: #3f4643;
+  --player-highlight-color: #39977f;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  scrollbar-width: thin;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
 }
 
 button {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
   cursor: pointer;
 
   img {
@@ -87,34 +70,7 @@ button {
   html {
     font-size: 90%;
   }
-}
 
-::-webkit-scrollbar {
-  width: var(--scrollbar-size);
-  height: var(--scrollbar-size);
-}
-
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 999px;
-  transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-}
-
-@media (max-width: 767px) {
   .hidden-md {
     display: none;
   }

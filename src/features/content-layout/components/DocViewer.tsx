@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import type { ContentGroup } from '../types';
@@ -13,6 +13,10 @@ export default function DocViewer({ current }: { current: ContentGroup }) {
   const component = useMemo(() => createTrackPopupTrigger(current), [current]);
   const articleRef = useCopyWithSource();
   useHashScroll(current.sections);
+
+  useEffect(() => {
+    articleRef.current?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [current]);
 
   return (
     <AudioPlayerProvider>

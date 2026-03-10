@@ -9,7 +9,6 @@ $track-popup-translateX: -1em;
     position: absolute;
     top: -0.25em;
     left: -0.65em;
-    animation: musicIconBounce 1s infinite ease-in-out;
   }
 }
 
@@ -25,7 +24,7 @@ $track-popup-translateX: -1em;
   font-weight: normal;
   font-size: 0.9em;
   transform: translateX($track-popup-translateX);
-  animation: trackPopupFadeIn 0.15s ease;
+  animation: fadeIn 0.15s ease;
 
   > div {
     display: flex;
@@ -51,7 +50,6 @@ $track-popup-translateX: -1em;
         button {
           width: 24px;
           height: 24px;
-          border: none;
           background-color: transparent;
           transition: transform 0.2s ease;
 
@@ -68,48 +66,29 @@ $track-popup-translateX: -1em;
   }
 
   &.track-popup-closing {
-    animation: trackPopupFadeOut 0.15s ease forwards;
-  }
-}
-
-@keyframes trackPopupFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX($track-popup-translateX) translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX($track-popup-translateX) translateY(0);
-  }
-}
-
-@keyframes trackPopupFadeOut {
-  from {
-    opacity: 1;
-    transform: translateX($track-popup-translateX) translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX($track-popup-translateX) translateY(-5px);
-  }
-}
-
-@keyframes musicIconBounce {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
+    animation: fadeOut 0.15s ease forwards;
   }
 
-  30% {
-    transform: translateY(-0.5em) scale(1.05, 0.95);
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX($track-popup-translateX) translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX($track-popup-translateX) translateY(0);
+    }
   }
 
-  60% {
-    transform: translateY(0) scale(0.95, 1.05);
-  }
-
-  80% {
-    transform: translateY(-0.2em) scale(1.02, 0.98);
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateX($track-popup-translateX) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX($track-popup-translateX) translateY(-5px);
+    }
   }
 }
 

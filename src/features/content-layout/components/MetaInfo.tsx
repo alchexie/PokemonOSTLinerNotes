@@ -1,10 +1,48 @@
+import { useEffect, useRef, useState } from 'react';
 import type { ContentGroup } from '../types';
+import exitIcon from '@/assets/icons/exit.svg';
 
 export default function MetaInfo({ current }: { current: ContentGroup }) {
   const meta = current.meta;
+  const [miniActive, setMiniActive] = useState<boolean>(false);
+  const asideRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (!asideRef.current) {
+        return;
+      }
+      if (!asideRef.current.contains(e.target as Node)) {
+        setMiniActive(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [miniActive]);
+
+  const active = () => {
+    if (miniActive) {
+      return;
+    }
+    setMiniActive(true);
+  };
+
+  const closeIfMobile = () => {
+    if (window.innerWidth < 768) {
+      setMiniActive(false);
+    }
+  };
 
   return (
-    <aside id="meta-info">
+    <aside
+      ref={asideRef}
+      id="meta-info"
+      className={miniActive ? 'active' : ''}
+      onClick={active}
+    >
       <img src={`../images/${current.key}.jpg`} />
       <span>{meta.album_cn}</span>
       <table className="meta-table">
@@ -36,14 +74,18 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
           return (
             <ul key={x.key}>
               <li>
-                <a href={`#${x.key}`}>{x.title}</a>
+                <a href={`#${x.key}`} onClick={closeIfMobile}>
+                  {x.title}
+                </a>
               </li>
               {x.files.map((y) => {
                 return (
                   !(x.files.length === 1 && !x.files[0].title) && (
                     <ul key={y.key}>
                       <li>
-                        <a href={`#${y.key}`}>{y.title}</a>
+                        <a href={`#${y.key}`} onClick={closeIfMobile}>
+                          {y.title}
+                        </a>
                       </li>
                     </ul>
                   )
@@ -53,6 +95,9 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
           );
         })}
       </div>
+      <button className="btn-exit" onClick={closeIfMobile}>
+        <img src={exitIcon}></img>
+      </button>
     </aside>
   );
 }

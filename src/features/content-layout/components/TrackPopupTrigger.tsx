@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
-import musicSvg from '@/assets/icons/music.svg';
+import musicIcon from '@/assets/icons/music.svg';
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
@@ -98,7 +98,7 @@ export default function TrackPopupTrigger({
       style={{ display: 'inline-block' }}
     >
       {trackIndexes.includes(`${currentAudio?.series}-${currentAudio?.indexiTunes}`) && (
-        <img src={musicSvg} className="music-icon hidden-md"></img>
+        <img src={musicIcon} className="music-icon active hidden-md"></img>
       )}
       {label}
       {isOpen &&
@@ -121,7 +121,7 @@ export default function TrackPopupTrigger({
 }
 
 function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps) {
-  const { awake } = useAudioPlayer();
+  const { queue, currentQueueIndex, awake } = useAudioPlayer();
   const tracks: Audio[] = trackIndexes.map((x) => {
     const [series, index] = x.split('-');
     const track = trackInfo[series].find((y) => y.slice(0, 2).includes(index))!;
@@ -133,6 +133,7 @@ function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps)
       titleCN: track[3],
     };
   });
+  const currentAudio = queue[currentQueueIndex];
 
   return (
     <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
@@ -141,8 +142,11 @@ function TrackPopupContent({ series, trackIndexes, isClosing }: TrackPopupProps)
           <div key={idx}>
             <span className="track-index">
               {`${x.series === series ? '' : `[${x.series}]-`}${x.indexDisc} (${x.indexiTunes})`}
-              <button onClick={() => awake(tracks, idx)}>
-                <img src={musicSvg} className="music-icon hidden-md"></img>
+              <button className="hidden-md" onClick={() => awake(tracks, idx)}>
+                <img
+                  src={musicIcon}
+                  className={`music-icon${currentAudio && currentAudio.series === x.series && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
+                ></img>
               </button>
             </span>
             <span>

@@ -29,6 +29,16 @@ export default function AudioTools() {
     };
   }, [visiblePlaylist]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (queue.length > 1) {
+        setVisiblePlaylist(true);
+      }
+    });
+  }, [JSON.stringify(queue)]);
+
+  const currentSeries = queue[currentQueueIndex].series;
+
   return (
     <div ref={toolsRef} className="audio-player-tools">
       <button onClick={switchMode}>
@@ -44,7 +54,7 @@ export default function AudioTools() {
         <img src={playlistIcon}></img>
       </button>
       <button
-        className={`audio-player-tools-volume${mute ? ' mute' : ''}`}
+        className={`audio-player-tools-volume${mute ? ' mute' : ''} no-hover`}
         onClick={toggleMute}
       >
         <img src={volumeIcon}></img>
@@ -52,21 +62,31 @@ export default function AudioTools() {
       <button onClick={close}>
         <img src={closeIcon}></img>
       </button>
-      <div className={`audio-player-playlist${visiblePlaylist ? ' active' : ''}`}>
-        {queue.map((x, idx) => {
-          return (
-            <span
-              key={idx}
-              onDoubleClick={() => {
-                jumpTo(idx);
-              }}
-            >
-              <span className={currentQueueIndex === idx ? 'active' : ''}>
-                {x.titleJP}【{x.titleCN}】
-              </span>
-            </span>
-          );
-        })}
+      <div
+        className={`audio-player-playlist${visiblePlaylist ? ' active' : ''}`}
+        style={{
+          backgroundImage: `url("${import.meta.env.BASE_URL}/images/${currentSeries}.jpg")`,
+        }}
+      >
+        <div className="audio-player-playlist-content">
+          <div>
+            {queue.map((x, idx) => {
+              return (
+                <span
+                  key={idx}
+                  className={currentQueueIndex === idx ? 'active' : ''}
+                  onDoubleClick={() => {
+                    jumpTo(idx);
+                  }}
+                >
+                  <span>
+                    {x.titleJP}【{x.titleCN}】
+                  </span>
+                </span>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

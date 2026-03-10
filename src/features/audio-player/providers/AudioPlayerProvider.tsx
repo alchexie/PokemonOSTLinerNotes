@@ -30,8 +30,6 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     'prev',
     'next',
     'seekTo',
-    'toggleMute',
-    'switchMode',
     'close',
   ] as const;
   const handlers: AudioPlayerHandlers = {
@@ -42,6 +40,14 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     ...(Object.fromEntries(
       methodNames.map((x) => [x, (core as any)[x].bind(core)])
     ) as Pick<AudioPlayerCore, (typeof methodNames)[number]>),
+    toggleMute: () => {
+      core.toggleMute();
+      setState({ ...core.getState() });
+    },
+    switchMode: () => {
+      core.switchMode();
+      setState({ ...core.getState() });
+    },
   };
 
   return (
