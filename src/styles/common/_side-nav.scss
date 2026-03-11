@@ -1,12 +1,14 @@
 #side-nav {
+  display: flex;
+  flex-direction: column;
   width: var(--side-nav-width);
+  height: 100%;
   border-right: 2px solid var(--nav-active-text-color);
   padding: 1rem 1rem 4rem;
-  overflow: auto;
 
   h1 {
     border-bottom: 1px solid var(--nav-active-text-color);
-    margin: 0 0 1rem;
+    margin: 0;
     padding: 0.5em 0;
     color: var(--nav-active-text-color);
     font-size: 1.5em;
@@ -14,8 +16,6 @@
   }
 
   nav {
-    margin-top: 2rem;
-
     a {
       display: block;
       padding: 0.5rem 1rem;
@@ -24,6 +24,41 @@
       &.active {
         color: var(--nav-active-text-color);
       }
+    }
+
+    &.nav-main {
+      flex: 0 1 auto;
+      border-bottom: 1px solid rgb(from var(--nav-active-text-color) r g b / 0.3);
+      padding: 1rem 0 0.5rem;
+      overflow-y: auto;
+      background:
+        linear-gradient(var(--nav-bg-color) 30%, transparent),
+        linear-gradient(transparent, var(--nav-bg-color) 70%) 0 100%,
+        radial-gradient(
+            farthest-side at 50% 0,
+            rgb(from var(--nav-active-text-color) r g b / 0.2),
+            transparent
+          )
+          0 0,
+        radial-gradient(
+            farthest-side at 50% 100%,
+            rgb(from var(--nav-active-text-color) r g b / 0.2),
+            transparent
+          )
+          0 100%;
+      background-repeat: no-repeat;
+      background-size:
+        100% 24px,
+        100% 24px,
+        100% 12px,
+        100% 12px;
+      background-attachment: local, local, scroll, scroll;
+      scrollbar-width: none;
+    }
+
+    &.nav-bottom {
+      flex-shrink: 0;
+      margin: 0.5rem 0 2rem;
     }
   }
 
@@ -39,6 +74,7 @@
     left: 0;
     z-index: 999;
     width: 100%;
+    height: unset;
     border: none;
     padding: 0;
 
@@ -51,14 +87,14 @@
     }
 
     nav {
-      margin-top: 0;
-      border-bottom: 1px solid var(--nav-active-text-color);
+      margin: 0 !important;
+      padding: 0 !important;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
 
       a {
-        margin: 1rem;
+        margin: 0.5rem;
       }
     }
 
@@ -74,8 +110,12 @@
       font-size: 1.5em;
 
       &:focus {
-        + nav {
+        ~ nav {
           max-height: 999px;
+
+          &:last-child {
+            border-bottom: 1px solid var(--nav-active-text-color);
+          }
         }
       }
     }
@@ -85,7 +125,7 @@
 @media (min-width: 768px) {
   #side-nav {
     nav {
-      font-size: 90%;
+      font-size: 85%;
     }
   }
 }

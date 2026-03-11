@@ -36,7 +36,6 @@ $track-popup-translateX: -1em;
         display: flex;
         color: var(--nav-active-text-color);
         font-weight: bold;
-        transform: translateY(0.2em);
 
         button {
           width: 24px;
@@ -88,6 +87,7 @@ $track-popup-translateX: -1em;
   .track-popup {
     > div > span {
       &.track-index {
+        margin-right: 0.5em;
         transform: translateY(0);
       }
     }

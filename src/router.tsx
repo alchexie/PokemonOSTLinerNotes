@@ -1,21 +1,32 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import MainLayout from './features/main-layout/MainLayout';
-import ContentLayout from './features/content-layout/ContentLayout';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import DocContent from './features/doc-content/DocContent';
+import SideNav from './features/side-nav/SideNav';
 
 export const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <MainLayout />,
+      element: (
+        <main id="main">
+          <SideNav />
+          <Outlet />
+        </main>
+      ),
       children: [
         {
           index: true,
           element: <Navigate to="/docs" />,
         },
         {
-          path: '/docs/:groupKey?',
-          element: <ContentLayout />,
+          path: '/docs/:ostSeries?',
+          element: <DocContent />,
         },
+        // {
+        //   path: '/musicians',
+        // },
+        // {
+        //   path: '/about',
+        // },
       ],
     },
   ],
