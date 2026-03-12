@@ -16,7 +16,7 @@ export default function SideNav() {
     <aside id="side-nav">
       <h1>{TITLE}</h1>
       <button>☰</button>
-      <nav className='nav-main'>
+      <nav className="nav-main">
         {groups.map((g) => (
           <a
             key={g.key}
@@ -27,9 +27,9 @@ export default function SideNav() {
           </a>
         ))}
       </nav>
-      <nav className='nav-bottom'>
-        <a>音乐家们</a>
-        <a>关于</a>
+      <nav className="nav-bottom">
+        <a onClick={() => navigate(`/musicians`)}>音乐家们</a>
+        <a onClick={() => navigate(`/about`)}>关于</a>
       </nav>
     </aside>
   );

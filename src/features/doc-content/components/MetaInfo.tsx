@@ -43,7 +43,7 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
       className={miniActive ? 'active' : ''}
       onClick={active}
     >
-      <img src={`../images/${current.key}.jpg`} />
+      <img src={`${import.meta.env.BASE_URL}/images/${current.key}.jpg`} />
       <span>{meta.album_cn}</span>
       <table className="meta-table">
         <tbody>

@@ -1,17 +1,14 @@
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import DocContent from './features/doc-content/DocContent';
-import SideNav from './features/side-nav/SideNav';
+import Musicians from './pages/Musicians';
+import About from './pages/About';
+import RootLayout from './RootLayout';
 
 export const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: (
-        <main id="main">
-          <SideNav />
-          <Outlet />
-        </main>
-      ),
+      element: <RootLayout />,
       children: [
         {
           index: true,
@@ -21,12 +18,14 @@ export const router = createBrowserRouter(
           path: '/docs/:ostSeries?',
           element: <DocContent />,
         },
-        // {
-        //   path: '/musicians',
-        // },
-        // {
-        //   path: '/about',
-        // },
+        {
+          path: '/musicians',
+          element: <Musicians />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        },
       ],
     },
   ],

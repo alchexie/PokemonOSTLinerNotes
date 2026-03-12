@@ -1,0 +1,116 @@
+{
+  "message": "这里只列出为宝可梦系列游戏作曲、编曲的音乐家。",
+  "data": [
+    {
+      "name": "増田順一",
+      "ost": [
+        "RGBY",
+        "GSC",
+        "RSE",
+        "FRLG",
+        "DPPT",
+        "HGSS",
+        "BW",
+        "B2W2",
+        "XY",
+        "ORAS",
+        "SM",
+        "USUM",
+        "SWSH",
+        "SV"
+      ],
+      "mark": 1
+    },
+    {
+      "name": "一之瀬剛",
+      "ost": [
+        "GSC",
+        "RSE",
+        "FRLG",
+        "DPPT",
+        "HGSS",
+        "BW",
+        "B2W2",
+        "SM",
+        "USUM",
+        "SWSH",
+        "LA",
+        "SV"
+      ],
+      "mark": 1
+    },
+    {
+      "name": "青木森一",
+      "ost": ["GSC", "RSE"]
+    },
+    {
+      "name": "佐藤仁美",
+      "ost": ["E", "DPPT", "BW", "B2W2", "XY", "ORAS", "SM", "USUM", "LA", "SV"],
+      "mark": 1
+    },
+    {
+      "name": "野原悟史",
+      "ost": ["DPPT"],
+      "mark": 0
+    },
+    {
+      "name": "景山将太",
+      "ost": ["HGSS", "BW", "B2W2", "XY", "ORAS", "LPLE", "BDSP"],
+      "mark": 1
+    },
+    {
+      "name": "橘田拓人",
+      "ost": ["HGSS"]
+    },
+    {
+      "name": "足立美奈子",
+      "ost": ["BW", "B2W2", "XY", "ORAS", "SM", "USUM", "SWSH", "SV"],
+      "mark": 1
+    },
+    {
+      "name": "谷口辉雄",
+      "ost": ["B2W2", "SV"]
+    },
+    {
+      "name": "黒田英明",
+      "ost": ["ORAS", "SM"]
+    },
+    {
+      "name": "大賀智章",
+      "ost": ["SM", "USUM"]
+    },
+    {
+      "name": "福田淳",
+      "ost": ["SM"],
+      "mark": 0
+    },
+    {
+      "name": "岡本圭太",
+      "ost": ["SWSH"],
+      "mark": 0
+    },
+    {
+      "name": "前馬宏充",
+      "ost": ["LA", "SV"]
+    },
+    {
+      "name": "Toby Fox",
+      "ost": ["SWSH", "SV"]
+    },
+    {
+      "name": "羽深由理",
+      "ost": ["SV"],
+      "mark": 0
+    },
+    {
+      "name": "添田悠",
+      "ost": ["SV"],
+      "mark": 0
+    },
+    {
+      "name": "村山礼",
+      "ost": ["SV"],
+      "mark": 0
+    }
+  ]
+}
