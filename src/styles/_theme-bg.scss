@@ -1,3 +1,5 @@
+@use '@/styles/base-url' as *;
+
 #main {
   #side-nav {
     h1 {
@@ -38,7 +40,7 @@
         text-indent: 3em;
 
         &:before {
-          background-image: url('@/assets/images/DJ_Rotom.webp');
+          background-image: url('#{$base-url}assets/images/ui/DJ_Rotom.webp');
           top: 4px;
           left: 1em;
           width: 40px;
@@ -52,7 +54,7 @@
 :root[data-theme='light'] {
   #main {
     #side-nav {
-      background-image: url('@/assets/images/bg_grass.webp');
+      background-image: url('#{$base-url}assets/images/ui/bg_grass.webp');
 
       nav {
         a {
@@ -91,7 +93,7 @@
     }
 
     #doc-viewer {
-      background-image: url('@/assets/images/bg_tile.webp');
+      background-image: url('#{$base-url}assets/images/ui/bg_tile.webp');
       background-size: contain;
       background-repeat: repeat;
       background-attachment: local;
@@ -157,7 +159,7 @@
       #side-nav {
         h1 {
           border: none;
-          background-image: url('@/assets/images/pokopia_font_logo_sky.webp');
+          background-image: url('#{$base-url}assets/images/ui/pokopia_font_logo_sky.webp');
 
           &:after {
             position: absolute;
@@ -166,7 +168,7 @@
             bottom: -1px;
             width: 100%;
             height: 30px;
-            background-image: url('@/assets/images/bg_grass_line.svg');
+            background-image: url('#{$base-url}assets/images/ui/bg_grass_line.svg');
             background-size: 300%;
             background-position: center bottom;
           }
@@ -182,7 +184,7 @@
       #side-nav {
         h1 {
           border-bottom: 1px dashed rgb(from var(--nav-active-text-color) r g b / 0.1);
-          background-image: url('@/assets/images/pokopia_font_logo_dark.webp');
+          background-image: url('#{$base-url}assets/images/ui/pokopia_font_logo_dark.webp');
         }
       }
     }

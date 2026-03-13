@@ -1,3 +1,5 @@
+@use '@/styles/base-url' as *;
+
 $triggerWidth: 48px;
 
 #meta-info {
@@ -80,7 +82,7 @@ $triggerWidth: 48px;
       position: absolute;
       width: $triggerWidth;
       height: $triggerWidth;
-      background-image: url('@/assets/icons/pokeball.svg');
+      background-image: url('#{$base-url}assets/images/ui/icons/pokeball.svg');
       background-size: cover;
       opacity: 1;
       transform: rotate(45deg);

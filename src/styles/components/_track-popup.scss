@@ -85,6 +85,12 @@ $track-popup-translateX: -3em;
   }
 }
 @media (max-width: 767px) {
+  .track-popup-trigger {
+    > .music-icon {
+      display: none;
+    }
+  }
+  
   .track-popup {
     table {
       td {

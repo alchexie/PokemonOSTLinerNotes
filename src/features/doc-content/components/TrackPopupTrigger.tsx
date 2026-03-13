@@ -13,9 +13,11 @@ import {
 import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
-import musicIcon from '@/assets/icons/music.svg';
 import SeriesTag from '../../series-tag/SeriesTag';
 import { getOstSeries } from '../../series-tag/utils/getOstSeries';
+
+const baseUrl = import.meta.env.BASE_URL;
+const musicIconUrl = `${baseUrl}assets/images/ui/icons/music.svg`;
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
@@ -28,7 +30,7 @@ interface TrackPopupProps {
 }
 
 const trackInfo: Record<string, string[][]> = await fetch(
-  `${import.meta.env.BASE_URL}data/track_info.json`
+  `${baseUrl}data/track_info.json`
 ).then((r) => r.json());
 
 const getPortalContainer = () => {
@@ -97,7 +99,7 @@ export default function TrackPopupTrigger({
       style={{ display: 'inline-block' }}
     >
       {trackIndexes.includes(`${currentAudio?.series}-${currentAudio?.indexiTunes}`) && (
-        <img src={musicIcon} className="music-icon active hidden-md"></img>
+        <img src={musicIconUrl} className="music-icon active hidden-md"></img>
       )}
       {label}
       {isOpen &&
@@ -143,7 +145,7 @@ function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
               <td>
                 <button onClick={() => awake(tracks, idx)}>
                   <img
-                    src={musicIcon}
+                    src={musicIconUrl}
                     className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
                   ></img>
                 </button>

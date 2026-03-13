@@ -33,7 +33,7 @@ export class AudioPlayerCore {
 
   load(track: Audio): void {
     const { series, indexiTunes } = track;
-    this.audio.src = `${import.meta.env.BASE_URL}assets/audio/${series}/${indexiTunes}.mp3`;
+    this.audio.src = `${import.meta.env.BASE_URL}audio/${series}/${indexiTunes}.mp3`;
     this.audio.load();
   }
 

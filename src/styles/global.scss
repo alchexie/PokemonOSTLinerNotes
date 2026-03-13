@@ -1,5 +1,7 @@
-@forward './common/index.scss';
-@forward './bg.scss';
+$base-url: '' !default;
+
+@forward './components/index.scss';
+@forward './theme-bg.scss';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

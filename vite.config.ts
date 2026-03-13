@@ -4,16 +4,18 @@ import path from 'path';
 import serveStatic from 'serve-static';
 
 // https://vite.dev/config/
+const baseUrl = '/pmost/';
+
 export default defineConfig({
-  base: '/pmost/',
+  base: baseUrl,
   plugins: [
     react(),
     {
       name: 'static-assets',
       configureServer(server) {
         server.middlewares.use(
-          '/assets',
-          serveStatic(path.resolve(__dirname, '../assets'))
+          '/audio',
+          serveStatic(path.resolve(__dirname, '../audio'))
         );
       },
     },
@@ -21,6 +23,26 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/base-url" as * with ($base-url: "${baseUrl}");`,
+      },
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
+            return 'react';
+          }
+          return 'vendor';
+        },
+      },
     },
   },
   server: {

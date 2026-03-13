@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ContentGroup } from '../types';
-import exitIcon from '@/assets/icons/exit.svg';
+
+const baseUrl = import.meta.env.BASE_URL;
 
 export default function MetaInfo({ current }: { current: ContentGroup }) {
   const meta = current.meta;
@@ -43,7 +44,7 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
       className={miniActive ? 'active' : ''}
       onClick={active}
     >
-      <img src={`${import.meta.env.BASE_URL}/images/${current.key}.jpg`} />
+      <img src={`${baseUrl}assets/images/content/${current.key}.jpg`} />
       <span>{meta.album_cn}</span>
       <table className="meta-table">
         <tbody>
@@ -96,7 +97,7 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
         })}
       </div>
       <button className="btn-exit" onClick={closeIfMobile}>
-        <img src={exitIcon}></img>
+        <img src={`${baseUrl}assets/images/ui/icons/exit.svg`}></img>
       </button>
     </aside>
   );

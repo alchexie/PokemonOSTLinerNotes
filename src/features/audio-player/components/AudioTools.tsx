@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
-import playlistIcon from '@/assets/icons/player/playlist.svg';
-import volumeIcon from '@/assets/icons/player/volume.svg';
-import closeIcon from '@/assets/icons/player/close.svg';
-import repeat0Icon from '@/assets/icons/player/repeat0.svg';
-import repeat1Icon from '@/assets/icons/player/repeat1.svg';
-import repeat2Icon from '@/assets/icons/player/repeat2.svg';
+
+const baseUrl = import.meta.env.BASE_URL;
+const getIconUrl = (iconName: string): string =>
+  `${baseUrl}assets/images/ui/icons/player/${iconName}.svg`;
 
 export default function AudioTools() {
   const { queue, currentQueueIndex, mute, mode, jumpTo, toggleMute, switchMode, close } =
@@ -42,7 +40,7 @@ export default function AudioTools() {
   return (
     <div ref={toolsRef} className="audio-player-tools">
       <button onClick={switchMode}>
-        <img src={!mode ? repeat0Icon : mode === 1 ? repeat1Icon : repeat2Icon}></img>
+        <img src={getIconUrl(`repeat${mode}`)}></img>
       </button>
       <span>|</span>
       <button
@@ -51,21 +49,21 @@ export default function AudioTools() {
           setVisiblePlaylist(!visiblePlaylist);
         }}
       >
-        <img src={playlistIcon}></img>
+        <img src={getIconUrl('playlist')}></img>
       </button>
       <button
         className={`audio-player-tools-volume${mute ? ' mute' : ''} no-hover`}
         onClick={toggleMute}
       >
-        <img src={volumeIcon}></img>
+        <img src={getIconUrl('volume')}></img>
       </button>
       <button onClick={close}>
-        <img src={closeIcon}></img>
+        <img src={getIconUrl('close')}></img>
       </button>
       <div
         className={`audio-player-playlist${visiblePlaylist ? ' active' : ''}`}
         style={{
-          backgroundImage: `url("${import.meta.env.BASE_URL}/images/${currentSeries}.jpg")`,
+          backgroundImage: `url("${baseUrl}assets/images/content/${currentSeries}.jpg")`,
         }}
       >
         <div className="audio-player-playlist-content">

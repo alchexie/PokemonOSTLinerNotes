@@ -1,6 +1,6 @@
 @forward './side-nav';
 @forward './doc-viewer';
-@forward './meta_info';
+@forward './meta-info';
 @forward './track-popup';
 @forward './audio-player';
 @forward './series-tag';
@@ -27,6 +27,7 @@
   position: fixed;
   bottom: 2rem;
   left: 2rem;
+  z-index: 999;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -82,3 +83,4 @@
     }
   }
 }
+
