@@ -15,10 +15,19 @@ export default function DocContent() {
   }, [ostSeries]);
 
   useEffect(() => {
-    if (!ostSeries && groups.length) {
-      navigate(`/docs/${groups[0].key}`, { replace: true });
+    if (!groups.length) {
+      return;
     }
-  }, []);
+    if (!ostSeries) {
+      navigate(`/docs/${groups[0].key}`, { replace: true });
+      return;
+    }
+
+    const isValid = groups.some((g) => g.key === ostSeries);
+    if (!isValid) {
+      navigate('/docs', { replace: true });
+    }
+  }, [groups, ostSeries, navigate]);
 
   useEffect(() => {
     if (!current) {

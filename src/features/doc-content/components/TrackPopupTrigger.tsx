@@ -133,30 +133,31 @@ function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
 
   return (
     <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
-      {tracks.map((x, idx) => {
-        return (
-          <div key={idx}>
-            <span className="track-index">
-              <span>
+      <table>
+        <tbody>
+          {tracks.map((x, idx) => (
+            <tr key={idx}>
+              <td>
                 <SeriesTag type={x.series}></SeriesTag>
-              </span>
-              <button className="hidden-md" onClick={() => awake(tracks, idx)}>
-                <img
-                  src={musicIcon}
-                  className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
-                ></img>
-              </button>
-            </span>
-            <span>
-              <span>{`${x.titleJP}`}</span>
-              <span className="track-title-cn">
-                <br></br>
-                <small>{x.titleCN}</small>
-              </span>
-            </span>
-          </div>
-        );
-      })}
+              </td>
+              <td>
+                <button onClick={() => awake(tracks, idx)}>
+                  <img
+                    src={musicIcon}
+                    className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
+                  ></img>
+                </button>
+              </td>
+              <td>
+                <span>{`${x.titleJP}`}</span>
+                <span>
+                  <small>{x.titleCN}</small>
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

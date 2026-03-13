@@ -6,14 +6,8 @@ export default function RootLayout() {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-
-    const main = document.getElementById('main');
-    main?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-
     const article = document.getElementById('doc-viewer');
     article?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-
   }, [location.pathname]);
 
   return (

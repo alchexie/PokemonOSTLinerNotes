@@ -25,6 +25,10 @@
       &.active {
         color: var(--nav-active-text-color);
       }
+
+      &.active {
+        font-weight: bold;
+      }
     }
 
     &.nav-main {
@@ -96,6 +100,10 @@
 
       a {
         margin: 0.5rem;
+      }
+
+      &.nav-bottom {
+        box-shadow: 0 4px 8px rgba(#000, 0.5);
       }
     }
 

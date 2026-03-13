@@ -1,4 +1,5 @@
 @forward './common/index.scss';
+@forward './bg.scss';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,7 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --side-nav-width: 240px;
-  --meta-info-width: 300px;
+  --meta-info-width: 350px;
 
   --bg-color: #e5f1ec;
   --text-color: #000000;
@@ -69,9 +70,5 @@ button {
 @media (max-width: 767px) {
   html {
     font-size: 90%;
-  }
-
-  .hidden-md {
-    display: none;
   }
 }

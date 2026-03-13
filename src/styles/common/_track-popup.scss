@@ -1,4 +1,4 @@
-$track-popup-translateX: -1em;
+$track-popup-translateX: -3em;
 
 .track-popup-trigger {
   position: relative;
@@ -26,32 +26,34 @@ $track-popup-translateX: -1em;
   transform: translateX($track-popup-translateX);
   animation: fadeIn 0.15s ease;
 
-  > div {
-    display: flex;
-    padding: 0.1em 0;
-    white-space: nowrap;
+  table {
+    td {
+      vertical-align: top;
 
-    span {
-      &.track-index {
-        display: flex;
-        color: var(--nav-active-text-color);
-        font-weight: bold;
+      span {
+        white-space: nowrap;
 
-        button {
-          width: 24px;
-          height: 24px;
-          margin: 0 0.25em;
-          background-color: transparent;
-          transition: transform 0.2s ease;
-
-          &:hover {
-            transform: scale(1.5);
-          }
+        small {
+          opacity: 0.5;
         }
       }
 
-      &.track-title-cn {
-        opacity: 0.5;
+      button {
+        width: 24px;
+        height: 24px;
+        margin: 0 0.25em;
+        background-color: transparent;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.5);
+        }
+      }
+
+      &:last-child {
+        span {
+          display: block;
+        }
       }
     }
   }
@@ -82,13 +84,13 @@ $track-popup-translateX: -1em;
     }
   }
 }
-
 @media (max-width: 767px) {
   .track-popup {
-    > div > span {
-      &.track-index {
-        margin-right: 0.5em;
-        transform: translateY(0);
+    table {
+      td {
+        button {
+          display: none;
+        }
       }
     }
   }

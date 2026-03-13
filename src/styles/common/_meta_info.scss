@@ -1,3 +1,5 @@
+$triggerWidth: 48px;
+
 #meta-info {
   width: var(--meta-info-width);
   padding: 1rem 1rem 4rem;
@@ -29,7 +31,7 @@
         flex: 1;
         display: block;
         margin: 0 0.2rem;
-        padding: 0.2em 1em;
+        padding: 0.4em 1em;
         border-radius: 0.5rem;
         background-color: var(--nav-active-text-color);
         color: white;
@@ -64,7 +66,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   #meta-info {
     position: fixed;
     top: 0;
@@ -76,43 +78,41 @@
     &:before {
       content: '';
       position: absolute;
-      width: 32px;
-      height: 32px;
-      border-top-left-radius: 16px;
-      background-color: var(--nav-active-text-color);
+      width: $triggerWidth;
+      height: $triggerWidth;
       background-image: url('@/assets/icons/pokeball.svg');
-      background-size: 24px 24px;
-      background-repeat: no-repeat;
-      background-position: center center;
-      font-size: 12px;
+      background-size: cover;
+      opacity: 1;
+      transform: rotate(45deg);
       text-align: center;
       cursor: pointer;
+    }
+
+    &.active {
+      &::before {
+        opacity: 0;
+      }
     }
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1199px) and (min-width: 768px) {
   #meta-info {
     transform: translateX(var(--meta-info-width));
 
     &:before {
       top: 50%;
-      left: -32px;
+      left: -$triggerWidth * 0.5;
       display: flex;
       align-items: center;
-      height: 96px;
-      border-bottom-left-radius: 16px;
-      transform: translateY(-50%);
+      transform: translateY(-50%) rotate(45deg);
     }
 
     &.active {
       overflow: auto;
-      border-left: 1px solid var(--nav-active-text-color);
+      border-left: 1px solid rgb(from var(--nav-active-text-color) r g b / 0.25);
+      box-shadow: -4px 0 16px rgba(#000, 0.5);
       transform: translateX(0);
-
-      &::before {
-        opacity: 0.5;
-      }
     }
   }
 }
@@ -125,11 +125,9 @@
     transform: translateX(0) translateY(100%);
 
     &:before {
-      top: -32px;
+      top: -$triggerWidth * 0.7;
       left: 50%;
-      width: 96px;
-      border-top-right-radius: 16px;
-      transform: translateX(-50%);
+      transform: translateX(-50%) rotate(45deg);
     }
 
     &.active {
