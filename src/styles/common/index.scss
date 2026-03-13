@@ -19,8 +19,7 @@
     flex: 1;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 3rem;
-    padding-bottom: 6rem;
+    padding: 3rem 3rem 0;
   }
 }
 
@@ -37,16 +36,20 @@
 
 @media (max-width: 767px) {
   #main {
+    display: block;
+    height: auto;
     overflow: auto;
 
     > article {
+      flex: none;
+      overflow: visible;
       margin-top: 3rem;
-      padding: 2rem;
-      padding-bottom: 4rem;
+      padding: 2rem 2rem 0;
     }
   }
 
   #btn-theme {
+    display: none;
     width: 48px;
     height: 48px;
   }

@@ -30,6 +30,7 @@ export default function SideNav() {
       <nav className="nav-bottom">
         {others.map(([path, title]) => (
           <a
+            key={path}
             className={path === location.pathname ? 'active' : ''}
             onClick={() => navigate(path)}
           >

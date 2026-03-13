@@ -1,4 +1,8 @@
 #doc-viewer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
   h2,
   h3 {
     scroll-margin-top: 1em;
@@ -61,13 +65,44 @@
       }
     }
   }
+
+  footer {
+    order: 999;
+    margin: auto -3rem 0;
+
+    > hr {
+      height: 3rem;
+      border: none;
+    }
+
+    > div {
+      padding-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: rgba(#000, 0.2);
+
+      p {
+        font-size: 0.9em;
+        line-height: 1.2em;
+      }
+    }
+  }
 }
 
 @media (max-width: 767px) {
   #doc-viewer {
+    min-height: calc(100vh - 3rem);
+
     h2,
     h3 {
       scroll-margin-top: 3.5em;
+    }
+
+    footer {
+      margin: auto -2rem 0;
+
+      > hr {
+        height: 2rem;
+      }
     }
   }
 }
