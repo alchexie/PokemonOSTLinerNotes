@@ -2,9 +2,7 @@ import { useEffect } from 'react';
 
 export const useHashScroll = (dependence: unknown) => {
   useEffect(() => {
-    if (!dependence) {
-      return;
-    }
+    if (!dependence) return;
 
     const scrollToHash = (hash?: string) => {
       const id = decodeURIComponent((hash ?? window.location.hash).slice(1));
@@ -27,9 +25,8 @@ export const useHashScroll = (dependence: unknown) => {
     scrollToHash();
 
     const catalog = document.querySelector('.meta-catalog') as HTMLElement | null;
-    if (!catalog) {
-      return;
-    }
+    if (!catalog) return;
+
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const a = target.closest('a[href^="#"]') as HTMLAnchorElement | null;

@@ -83,6 +83,10 @@
       p {
         font-size: 0.9em;
         line-height: 1.2em;
+
+        &:has(small) {
+          margin: 0.5em 0;
+        }
       }
     }
   }

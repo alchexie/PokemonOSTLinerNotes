@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: var(--side-nav-width);
-  height: 100%;
   border-right: 2px solid var(--nav-active-text-color);
   padding: 1rem 1rem 4rem;
 
@@ -15,55 +14,61 @@
     text-align: center;
   }
 
-  nav {
-    a {
-      display: block;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
+  > div {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 
-      &:hover,
-      &.active {
-        color: var(--nav-active-text-color);
+    nav {
+      a {
+        display: block;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+
+        &:hover,
+        &.active {
+          color: var(--nav-active-text-color);
+        }
+
+        &.active {
+          font-weight: bold;
+        }
       }
 
-      &.active {
-        font-weight: bold;
+      &.nav-main {
+        flex: 0 1 auto;
+        border-bottom: 1px solid rgb(from var(--nav-active-text-color) r g b / 0.3);
+        padding: 1rem 0 0.5rem;
+        overflow-y: auto;
+        background:
+          linear-gradient(var(--nav-bg-color) 30%, transparent),
+          linear-gradient(transparent, var(--nav-bg-color) 70%) 0 100%,
+          radial-gradient(
+              farthest-side at 50% 0,
+              rgb(from var(--nav-active-text-color) r g b / 0.2),
+              transparent
+            )
+            0 0,
+          radial-gradient(
+              farthest-side at 50% 100%,
+              rgb(from var(--nav-active-text-color) r g b / 0.2),
+              transparent
+            )
+            0 100%;
+        background-repeat: no-repeat;
+        background-size:
+          100% 24px,
+          100% 24px,
+          100% 12px,
+          100% 12px;
+        background-attachment: local, local, scroll, scroll;
+        scrollbar-width: none;
       }
-    }
 
-    &.nav-main {
-      flex: 0 1 auto;
-      border-bottom: 1px solid rgb(from var(--nav-active-text-color) r g b / 0.3);
-      padding: 1rem 0 0.5rem;
-      overflow-y: auto;
-      background:
-        linear-gradient(var(--nav-bg-color) 30%, transparent),
-        linear-gradient(transparent, var(--nav-bg-color) 70%) 0 100%,
-        radial-gradient(
-            farthest-side at 50% 0,
-            rgb(from var(--nav-active-text-color) r g b / 0.2),
-            transparent
-          )
-          0 0,
-        radial-gradient(
-            farthest-side at 50% 100%,
-            rgb(from var(--nav-active-text-color) r g b / 0.2),
-            transparent
-          )
-          0 100%;
-      background-repeat: no-repeat;
-      background-size:
-        100% 24px,
-        100% 24px,
-        100% 12px,
-        100% 12px;
-      background-attachment: local, local, scroll, scroll;
-      scrollbar-width: none;
-    }
-
-    &.nav-bottom {
-      flex-shrink: 0;
-      margin: 0.5rem 0 2rem;
+      &.nav-bottom {
+        margin: 0.5rem 0 2rem;
+      }
     }
   }
 
@@ -73,37 +78,46 @@
 }
 
 @media (max-width: 767px) {
+  $headerHeight: 3rem;
+
   #side-nav {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
     width: 100%;
-    height: unset;
+    max-height: $headerHeight;
     border: none;
     padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(#000, 0.5);
+    transition: max-height 0.3s ease;
 
     h1 {
       position: relative;
       margin: 0;
-      padding: 0.5em 1em;
+      height: $headerHeight;
+      padding-left: 1em;
       text-align: left;
       font-size: 1.2em;
     }
 
-    nav {
-      margin: 0 !important;
-      padding: 0 !important;
-      max-height: 0;
+    > div {
+      flex: 0 1 auto;
       overflow: hidden;
       transition: max-height 0.3s ease;
 
-      a {
-        margin: 0.5rem;
-      }
+      nav {
+        margin: 0 !important;
+        padding: 0 !important;
 
-      &.nav-bottom {
-        box-shadow: 0 4px 8px rgba(#000, 0.5);
+        a {
+          margin: 0.5rem;
+        }
+
+        &.nav-bottom {
+          padding-bottom: 2rem !important;
+        }
       }
     }
 
@@ -117,17 +131,15 @@
       background-color: transparent;
       color: var(--nav-active-text-color);
       font-size: 1.5em;
-
-      &:focus {
-        ~ nav {
-          max-height: 999px;
-
-          &:last-child {
-            border-bottom: 1px solid var(--nav-active-text-color);
-          }
-        }
-      }
     }
+
+    &:focus-within {
+      max-height: 100%;
+    }
+  }
+
+  body:has(#side-nav button:focus-within) {
+    overflow: hidden;
   }
 }
 

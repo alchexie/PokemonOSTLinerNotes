@@ -29,7 +29,13 @@ function DocFooterPortal() {
           <p>© 2026 {TITLE}</p>
           <p>
             <small>
-              Fan project. Not affiliated with Nintendo, Game Freak, The Pokémon Company.
+              Fan project. Not affiliated with Nintendo, Game Freak, or The Pokémon
+              Company.
+            </small>
+          </p>
+          <p>
+            <small>
+              本站为粉丝项目，非官方网站。站内所有素材版权归各自版权所有者所有。
             </small>
           </p>
         </div>

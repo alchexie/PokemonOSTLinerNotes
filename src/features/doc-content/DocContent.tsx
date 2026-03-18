@@ -15,9 +15,8 @@ export default function DocContent() {
   }, [ostSeries]);
 
   useEffect(() => {
-    if (!groups.length) {
-      return;
-    }
+    if (!groups.length) return;
+
     if (!ostSeries) {
       navigate(`/docs/${groups[0].key}`, { replace: true });
       return;
@@ -30,9 +29,8 @@ export default function DocContent() {
   }, [groups, ostSeries, navigate]);
 
   useEffect(() => {
-    if (!current) {
-      return;
-    }
+    if (!current) return;
+
     document.title = `${current.title} - ${TITLE}`;
   }, [current]);
 

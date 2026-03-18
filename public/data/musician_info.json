@@ -45,12 +45,12 @@
     },
     {
       "name": "佐藤仁美",
-      "ost": ["E", "DPPT", "BW", "B2W2", "XY", "ORAS", "SM", "USUM", "LA", "SV"],
+      "ost": ["E", "DPPT", "BW", "B2W2", "XY", "ORAS", "SM", "USUM", "SWSH", "LA", "SV"],
       "mark": 1
     },
     {
       "name": "野原悟史",
-      "ost": ["DPPT"],
+      "ost": ["PT"],
       "mark": 0
     },
     {

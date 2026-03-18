@@ -7,9 +7,7 @@ export const useCopyWithSource = () => {
 
   useEffect(() => {
     const elem = ref.current;
-    if (!elem) {
-      return;
-    }
+    if (!elem) return;
 
     const handler = (e: ClipboardEvent) => {
       const text = window.getSelection()?.toString();

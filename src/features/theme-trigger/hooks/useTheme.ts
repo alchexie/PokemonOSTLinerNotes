@@ -18,14 +18,12 @@ export const useTheme = () => {
   );
 
   useEffect(() => {
-    console.log(theme);
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {
-    if (!isMobile || isManual) {
-      return;
-    }
+    if (!isMobile || isManual) return;
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
       setTheme(e.matches ? 'dark' : 'light');
@@ -35,9 +33,8 @@ export const useTheme = () => {
   }, [isManual]);
 
   const toggleTheme = useCallback(() => {
-    if (isMobile) {
-      return;
-    }
+    if (isMobile) return;
+
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     setIsManual(true);

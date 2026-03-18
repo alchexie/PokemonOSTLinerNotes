@@ -51,9 +51,8 @@ export class AudioPlayerCore {
   }
 
   jumpTo(queueIndex: number): void {
-    if (queueIndex === this.currentQueueIndex) {
-      return;
-    }
+    if (queueIndex === this.currentQueueIndex) return;
+
     this.currentQueueIndex = queueIndex;
     this.load(this.queue[this.currentQueueIndex]);
     this.audio.play();
