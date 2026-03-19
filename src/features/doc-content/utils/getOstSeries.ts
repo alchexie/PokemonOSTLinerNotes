@@ -9,5 +9,6 @@ const SERIES_TO_OST: Record<string, string> = {
 };
 
 export const getOstSeries = (input: string): string => {
-  return SERIES_TO_OST[input] ?? input;
+  input = input.toLocaleUpperCase();
+  return (SERIES_TO_OST[input] ?? input).toLocaleLowerCase();
 };

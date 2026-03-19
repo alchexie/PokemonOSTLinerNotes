@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
 import SeriesTag from '../../series-tag/SeriesTag';
-import { getOstSeries } from '../../series-tag/utils/getOstSeries';
+import { getOstSeries } from '../utils/getOstSeries';
 
 const baseUrl = import.meta.env.BASE_URL;
 const musicIconUrl = `${baseUrl}assets/images/ui/icons/music.svg`;
@@ -90,6 +90,13 @@ export default function TrackPopupTrigger({
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, dismiss]);
 
   const currentAudio = queue[currentQueueIndex];
+  const foramtTrackIndexes = trackIndexes.map((x) => {
+    const [ost, index] = x.split('-');
+    if (/^[0-9]+$/.test(index)) {
+      return x;
+    }
+    return `${ost}-${trackInfo[getOstSeries(ost)].find((y) => index === y[0])![1]}`;
+  });
 
   return (
     <strong
@@ -98,9 +105,9 @@ export default function TrackPopupTrigger({
       className="track-popup-trigger"
       style={{ display: 'inline-block' }}
     >
-      {trackIndexes.includes(`${currentAudio?.series}-${currentAudio?.indexiTunes}`) && (
-        <img src={musicIconUrl} className="music-icon active hidden-md"></img>
-      )}
+      {foramtTrackIndexes.includes(
+        `${currentAudio?.series}-${currentAudio?.indexiTunes}`
+      ) && <img src={musicIconUrl} className="music-icon active hidden-md"></img>}
       {label}
       {isOpen &&
         createPortal(
@@ -109,7 +116,7 @@ export default function TrackPopupTrigger({
             style={{ ...floatingStyles, pointerEvents: 'auto' }}
             {...getFloatingProps()}
           >
-            <TrackPopupContent trackIndexes={trackIndexes} isClosing={isClosing} />
+            <TrackPopupContent trackIndexes={foramtTrackIndexes} isClosing={isClosing} />
           </div>,
           getPortalContainer()
         )}
@@ -121,10 +128,11 @@ function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
   const { queue, currentQueueIndex, awake } = useAudioPlayer();
   const tracks: Audio[] = trackIndexes.map((x) => {
     const [series, index] = x.split('-');
-    const track = trackInfo[series].find((y) => y.slice(0, 2).includes(index))!;
+    const ostSeries = getOstSeries(series);
+    const track = trackInfo[ostSeries].find((y) => y.slice(0, 2).includes(index))!;
     return {
       series,
-      ostSeries: getOstSeries(series),
+      ostSeries: ostSeries,
       indexDisc: track[0],
       indexiTunes: track[1],
       titleJP: track[2],

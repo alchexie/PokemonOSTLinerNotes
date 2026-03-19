@@ -50,6 +50,10 @@ $track-popup-translateX: -3em;
         }
       }
 
+      &:first-child {
+        text-align: center;
+      }
+
       &:last-child {
         span {
           display: block;
@@ -90,7 +94,7 @@ $track-popup-translateX: -3em;
       display: none;
     }
   }
-  
+
   .track-popup {
     table {
       td {

@@ -50,6 +50,10 @@ export const SERIES_TAG_COLOR_MAP: Record<string, [string, HexColor][]> = {
     ['SS', '#9DBCE3'],
   ],
   PT: [['PT', '#B69E00']],
+  DP: [
+    ['D', '#8AAEF5'],
+    ['P', '#DC669D'],
+  ],
   DPPT: [
     ['D', '#8AAEF5'],
     ['P', '#DC669D'],
@@ -60,6 +64,10 @@ export const SERIES_TAG_COLOR_MAP: Record<string, [string, HexColor][]> = {
     ['LG', '#97CD12'],
   ],
   E: [['E', '#00A000']],
+  RS: [
+    ['R', '#BD0109'],
+    ['S', '#3761AC'],
+  ],
   RSE: [
     ['R', '#BD0109'],
     ['S', '#3761AC'],

@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TITLE } from './App';
+import { AudioPlayerProvider } from './features/audio-player/providers/AudioPlayerProvider';
+import { AudioPlayer } from './features/audio-player/AudioPlayer';
 
 function DocFooterPortal() {
   const [target, setTarget] = useState<HTMLElement | null>(null);
@@ -58,7 +60,10 @@ export default function RootLayout() {
   return (
     <main id="main">
       <SideNav />
-      <Outlet />
+      <AudioPlayerProvider>
+        <Outlet />
+        <AudioPlayer />
+      </AudioPlayerProvider>
       <DocFooterPortal />
     </main>
   );

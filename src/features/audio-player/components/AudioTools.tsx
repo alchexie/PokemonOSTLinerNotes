@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
+import { getOstSeries } from '@/features/doc-content/utils/getOstSeries';
 
 const baseUrl = import.meta.env.BASE_URL;
 const getIconUrl = (iconName: string): string =>
@@ -63,7 +64,7 @@ export default function AudioTools() {
       <div
         className={`audio-player-playlist${visiblePlaylist ? ' active' : ''}`}
         style={{
-          backgroundImage: `url("${baseUrl}assets/images/content/${currentSeries}.jpg")`,
+          backgroundImage: `url("${baseUrl}assets/images/content/${getOstSeries(currentSeries)}.jpg")`,
         }}
       >
         <div className="audio-player-playlist-content">
