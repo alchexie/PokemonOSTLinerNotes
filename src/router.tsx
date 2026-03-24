@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import DocContent from './features/doc-content/DocContent';
-import Musicians from './pages/Musicians';
+import Composer from './pages/Composer';
 import About from './pages/About';
 import RootLayout from './RootLayout';
 
@@ -19,8 +19,8 @@ export const router = createBrowserRouter(
           element: <DocContent />,
         },
         {
-          path: '/musicians',
-          element: <Musicians />,
+          path: '/composer',
+          element: <Composer />,
         },
         {
           path: '/about',

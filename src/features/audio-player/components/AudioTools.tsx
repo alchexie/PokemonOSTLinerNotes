@@ -14,9 +14,8 @@ export default function AudioTools() {
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (!toolsRef.current || !visiblePlaylist) {
-        return;
-      }
+      if (!toolsRef.current || !visiblePlaylist) return;
+
       if (!toolsRef.current.contains(e.target as Node)) {
         setVisiblePlaylist(false);
       }

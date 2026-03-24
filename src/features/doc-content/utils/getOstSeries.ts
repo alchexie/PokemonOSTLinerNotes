@@ -3,7 +3,7 @@ const SERIES_TO_OST: Record<string, string> = {
   DPPT: 'DP',
   E: 'B2W2',
   RSE: 'RS',
-  GSC: 'HGSS',
+  GS: 'HGSS',
   Y: 'LPLE',
   RGBY: 'RG',
 };

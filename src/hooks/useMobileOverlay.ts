@@ -38,9 +38,7 @@ export function useMobileOverlay(breakpoint = 768) {
     if (!isOpenOverlay) return;
 
     const handleClick = (e: MouseEvent) => {
-      if (!refOverlay.current) {
-        return;
-      }
+      if (!refOverlay.current) return;
       if (!refOverlay.current.contains(e.target as Node)) {
         closeOverlay();
       }

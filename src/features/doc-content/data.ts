@@ -40,7 +40,7 @@ const createContent = (): ContentGroup[] => {
       const current =
         sectionMap.get(section) ??
         ({
-          key: section,
+          key: section.slice(2),
           title: section.replace(/^\d+-/, ''),
           meta: {} as ContentMeta,
           files: [],
@@ -57,7 +57,7 @@ const createContent = (): ContentGroup[] => {
       const { attributes, body } = fm<ContentMeta>(raw);
       const strKey = filename.replace(/\.md$/, '');
       current.files.push({
-        key: strKey,
+        key: `${current.key}+${strKey.slice(3)}`,
         title: attributes.title ?? strKey.replace(/^\d+-/, ''),
         meta: attributes,
         content: body,

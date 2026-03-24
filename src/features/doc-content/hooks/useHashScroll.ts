@@ -6,13 +6,10 @@ export const useHashScroll = (dependence: unknown) => {
 
     const scrollToHash = (hash?: string) => {
       const id = decodeURIComponent((hash ?? window.location.hash).slice(1));
-      if (!id) {
-        return;
-      }
+      if (!id) return;
+
       const elem = document.getElementById(id);
-      if (!elem) {
-        return;
-      }
+      if (!elem) return;
 
       requestAnimationFrame(() => {
         elem.scrollIntoView({
@@ -30,14 +27,10 @@ export const useHashScroll = (dependence: unknown) => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const a = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
-      if (!a) {
-        return;
-      }
+      if (!a) return;
 
       const hash = a.hash;
-      if (!hash) {
-        return;
-      }
+      if (!hash) return;
 
       const el = document.getElementById(hash.slice(1));
       if (!el) return;

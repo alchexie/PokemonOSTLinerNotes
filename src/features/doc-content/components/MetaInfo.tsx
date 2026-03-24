@@ -63,11 +63,13 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
                   return (
                     !(x.files.length === 1 && !x.files[0].title) && (
                       <ul key={y.key}>
-                        <li>
-                          <a href={`#${y.key}`} onClick={closeOverlay}>
-                            {y.title}
-                          </a>
-                        </li>
+                        {y.title && (
+                          <li>
+                            <a href={`#${y.key}`} onClick={closeOverlay}>
+                              {y.title}
+                            </a>
+                          </li>
+                        )}
                       </ul>
                     )
                   );

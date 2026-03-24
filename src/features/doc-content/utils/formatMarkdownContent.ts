@@ -24,9 +24,29 @@ const parsePersonColor = (input: string): PersonColor[] => {
 
 const renderPersonColor = (input: string, config: PersonColor[]) => {
   const map = new Map(config.map((p) => [p.name, p.color]));
-  return input.replace(/([^：\s]+)：/g, (match, name) => {
-    const color = map.get(name);
-    return `<span style="color: ${color}">${match}</span>`;
+  if (map.size === 0) {
+    return input;
+  }
+
+  const namePattern = Array.from(map.keys()).join('|');
+  if (!namePattern) {
+    return input;
+  }
+  const lineRegex = /^([^：\r\n]*)(：)/gm;
+  const nameRegex = new RegExp(namePattern, 'g');
+
+  return input.replace(lineRegex, (match, segment, colon) => {
+    let changed = false;
+    const replaced = segment.replace(nameRegex, (name: string) => {
+      const color = map.get(name);
+      changed = true;
+      return `<span style="color: ${color}">${name}</span>`;
+    });
+
+    if (!changed) {
+      return match;
+    }
+    return `${replaced}${colon}`;
   });
 };
 

@@ -4,7 +4,16 @@ $base-url: '' !default;
 @forward './theme-bg.scss';
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family:
+    'Noto Sans SC',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Segoe UI',
+    'Roboto',
+    system-ui,
+    -apple-system,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -28,6 +37,16 @@ $base-url: '' !default;
   --scrollbar-thumb-color: #c7dfd6;
 
   --player-highlight-color: #43a874;
+
+  a {
+    &:link {
+      color: #2563eb;
+    }
+
+    &:visited {
+      color: #7c3aed;
+    }
+  }
 }
 
 :root[data-theme='dark'] {
@@ -41,6 +60,16 @@ $base-url: '' !default;
   --scrollbar-thumb-color: #2b3431;
 
   --player-highlight-color: #39977f;
+
+  a {
+    &:link {
+      color: #9e9eff;
+    }
+
+    &:visited {
+      color: #d0adf0;
+    }
+  }
 }
 
 *,

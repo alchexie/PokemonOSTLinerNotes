@@ -9,7 +9,7 @@ const SERIES_TO_OST = {
   DPPT: 'DP',
   E: 'B2W2',
   RSE: 'RS',
-  GSC: 'HGSS',
+  GS: 'HGSS',
   Y: 'LPLE',
   RGBY: 'RG',
 };

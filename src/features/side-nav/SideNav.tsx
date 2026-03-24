@@ -11,7 +11,7 @@ export default function SideNav() {
 
   const contentGroups = CONTENT;
   const others = [
-    ['/musicians', '音乐家们'],
+    ['/composer', '作曲家们'],
     ['/about', '关于'],
   ];
   const to = (path: string) => {
