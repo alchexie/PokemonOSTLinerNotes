@@ -1,4 +1,4 @@
-// import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import type { ContentGroup } from '../types';
 import { useMobileOverlay } from '@/hooks/useMobileOverlay';
 
@@ -42,41 +42,54 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
             </tbody>
           </table>
           <div>
-            <a href={meta.wiki_url} target="_blank">
+            <a href={meta.wiki_url} target="_blank" rel="noopener noreferrer">
               专辑详情
             </a>
-            <a href={meta.cover_art_url} target="_blank">
+            <a href={meta.cover_art_url} target="_blank" rel="noopener noreferrer">
               专辑图像
             </a>
           </div>
         </section>
         <section className="meta-catalog">
-          {current.sections.map((x) => {
-            return (
-              <ul key={x.key}>
-                <li>
-                  <a href={`#${x.key}`} onClick={closeOverlay}>
-                    {x.title}
-                  </a>
-                </li>
-                {x.files.map((y) => {
-                  return (
-                    !(x.files.length === 1 && !x.files[0].title) && (
-                      <ul key={y.key}>
-                        {y.title && (
-                          <li>
-                            <a href={`#${y.key}`} onClick={closeOverlay}>
-                              {y.title}
-                            </a>
-                          </li>
-                        )}
-                      </ul>
-                    )
-                  );
-                })}
-              </ul>
-            );
-          })}
+          <nav>
+            {current.sections.map((x) => {
+              return (
+                x.key && (
+                  <React.Fragment key={x.key}>
+                    {x.files.length === 1 && !x.files[0].title ? (
+                      <a href={`#${x.key}`} onClick={closeOverlay} title={x.title}>
+                        {x.title}
+                      </a>
+                    ) : (
+                      <>
+                        <details open={current.sections.length === 1}>
+                          <summary>
+                            <span title={x.title}>{x.title}</span>
+                          </summary>
+                        </details>
+                        <nav>
+                          {x.files.map((y) => {
+                            return (
+                              y.title && (
+                                <a
+                                  key={y.key}
+                                  href={`#${y.key}`}
+                                  onClick={closeOverlay}
+                                  title={y.title}
+                                >
+                                  {y.title}
+                                </a>
+                              )
+                            );
+                          })}
+                        </nav>
+                      </>
+                    )}
+                  </React.Fragment>
+                )
+              );
+            })}
+          </nav>
         </section>
       </div>
       <button className="btn-exit" onClick={closeOverlay}>

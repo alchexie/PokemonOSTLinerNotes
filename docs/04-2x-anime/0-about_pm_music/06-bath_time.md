@@ -1,5 +1,5 @@
 ---
-title: Bath Time 就是灵感涌现之时
+title: 'Bath Time 就是灵感涌现之时'
 diff_colors: '宫崎 #2870F0 | 增田 #F48624 | 一之濑 #309961 | 佐藤 #8E79B8'
 ---
 
