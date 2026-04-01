@@ -57,7 +57,7 @@
 }
 
 .music-icon {
-  width: 24px;
+  width: 24px !important;
   height: 24px;
 
   &.active {
@@ -83,4 +83,3 @@
     }
   }
 }
-

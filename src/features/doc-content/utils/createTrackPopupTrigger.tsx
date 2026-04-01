@@ -1,8 +1,8 @@
 import React, { type ReactNode } from 'react';
-import type { ContentGroup } from '../types';
+import type { ContentSeries } from '@/types';
 import TrackPopupTrigger from '../components/TrackPopupTrigger';
 
-export default function createTrackPopupTrigger(current: ContentGroup) {
+export const createTrackPopupTrigger = (current: ContentSeries) => {
   return function ({ children }: { children?: ReactNode }) {
     const [label, em] = React.Children.toArray(children);
     if (
@@ -19,4 +19,4 @@ export default function createTrackPopupTrigger(current: ContentGroup) {
       return <strong>{children}</strong>;
     }
   };
-}
+};

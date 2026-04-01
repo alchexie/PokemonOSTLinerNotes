@@ -1,7 +1,7 @@
-import type { ContentGroup, ContentMeta } from './types';
+import type { ContentSeries, ContentMeta } from '@/types';
 import { contentLoaders } from '@/loaders/content-loaders';
 
-const loadSeriesMetaList = (): ContentGroup[] => {
+const loadSeriesMetaList = (): ContentSeries[] => {
   const sectionMetaModules = import.meta.glob('/docs/**/_meta.json', {
     eager: true,
     import: 'default',
@@ -10,7 +10,7 @@ const loadSeriesMetaList = (): ContentGroup[] => {
     Object.entries(sectionMetaModules).filter(([key]) => key.split('/').length === 4)
   );
 
-  const groups: ContentGroup[] = Object.entries(seriesMetaModules)
+  const seriesList: ContentSeries[] = Object.entries(seriesMetaModules)
     .map(([metaPath, meta]) => {
       const folder = metaPath.split('/')[2];
       return {
@@ -22,13 +22,13 @@ const loadSeriesMetaList = (): ContentGroup[] => {
     })
     .reverse();
 
-  return groups;
+  return seriesList;
 };
-const contentCache = new Map<string, ContentGroup>();
+const contentCache = new Map<string, ContentSeries>();
 
 export const loadContentByOstSeries = async (
   ostSeries: string
-): Promise<ContentGroup | null> => {
+): Promise<ContentSeries | null> => {
   if (contentCache.has(ostSeries)) {
     return contentCache.get(ostSeries)!;
   }
@@ -43,9 +43,9 @@ export const loadContentByOstSeries = async (
   return content;
 };
 
-export const CONTENT_GROUPS = loadSeriesMetaList().map((meta) => ({
+export const CONTENT_SERIES_LIST = loadSeriesMetaList().map((meta) => ({
   key: meta.key,
   title: meta.title,
   meta: meta.meta,
   sections: [],
-})) as ContentGroup[];
+})) as ContentSeries[];

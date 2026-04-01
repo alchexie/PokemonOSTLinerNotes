@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMobileOverlay } from '@/hooks/useMobileOverlay';
-import { CONTENT_GROUPS } from '../doc-content/data';
-import { TITLE } from '../../App';
+import { CONTENT_SERIES_LIST } from '@/services/content-repository';
+import { TITLE } from '@/App';
 
 export default function SideNav() {
   const location = useLocation();
@@ -9,7 +9,6 @@ export default function SideNav() {
   const { isOpenOverlay, openOverlay, closeOverlay, refOverlay, refTrigger } =
     useMobileOverlay();
 
-  const contentGroups = CONTENT_GROUPS;
   const others = [
     ['/composer', '作曲家们'],
     ['/about', '关于'],
@@ -30,7 +29,7 @@ export default function SideNav() {
       </button>
       <div>
         <nav className="nav-main">
-          {contentGroups.map((x) => (
+          {CONTENT_SERIES_LIST.map((x) => (
             <a
               key={x.key}
               className={x.key === location.pathname.split('/').at(-1) ? 'active' : ''}

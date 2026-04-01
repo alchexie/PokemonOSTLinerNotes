@@ -2,7 +2,7 @@ export interface ContentMeta extends Record<string, string> {
   title: string;
 }
 
-export interface ContentGroup {
+export interface ContentSeries {
   key: string;
   title: string;
   meta: ContentMeta;

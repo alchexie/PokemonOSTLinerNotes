@@ -59,8 +59,7 @@ export default function AudioProgressBar() {
     <div className="audio-player-progress">
       <span className="audio-player-progress-title">
         <SeriesTag type={currentTrack.series}></SeriesTag>
-        &nbsp;
-        <span>{currentTrack.titleJP} 【{currentTrack.titleCN}】</span>
+        {currentTrack.titleCN}
       </span>
       <div>
         <div

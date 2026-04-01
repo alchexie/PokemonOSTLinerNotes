@@ -73,6 +73,10 @@ $triggerWidth: 48px;
         text-overflow: ellipsis;
         cursor: pointer;
 
+        &.active {
+          font-weight: bold;
+        }
+
         &:before {
           content: '◦ ';
           display: inline-block;
@@ -113,6 +117,10 @@ $triggerWidth: 48px;
           color: var(--nav-active-text-color);
           line-height: 2em;
           cursor: pointer;
+
+          &.active {
+            font-weight: bold;
+          }
 
           &:before {
             content: '▶';
@@ -223,8 +231,8 @@ $triggerWidth: 48px;
     .btn-exit {
       display: block;
       position: absolute;
-      right: 2rem;
-      bottom: 2rem;
+      right: 1rem;
+      bottom: 1rem;
       width: 64px;
       height: 64px;
       background: transparent;

@@ -14,11 +14,13 @@ import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
 import SeriesTag from '../../series-tag/SeriesTag';
-import { useTrackInfo } from '../hooks/useTrackInfo';
 import { getOstSeries } from '../utils/getOstSeries';
+import trackInfo from '@/data/track_info.json';
 
 const baseUrl = import.meta.env.BASE_URL;
 const musicIconUrl = `${baseUrl}assets/images/ui/icons/music.svg`;
+
+type TrackInfo = Record<string, string[][]>;
 
 interface TrackPopupTriggerProps {
   label: ReactNode;
@@ -53,7 +55,6 @@ export default function TrackPopupTrigger({
   label,
   trackIndexes,
 }: TrackPopupTriggerProps) {
-  const trackInfo = useTrackInfo();
   const { queue, currentQueueIndex } = useAudioPlayer();
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -94,7 +95,7 @@ export default function TrackPopupTrigger({
     if (/^[0-9]+$/.test(index)) {
       return x;
     }
-    return `${ost}-${trackInfo?.[getOstSeries(ost)]?.find((y) => index === y[0])![1] ?? index}`;
+    return `${ost}-${(trackInfo as TrackInfo)?.[getOstSeries(ost)]?.find((y) => index === y[0])![1] ?? index}`;
   });
 
   return (
@@ -136,9 +137,9 @@ export default function TrackPopupTrigger({
 function TrackPopupContent({ trackIndexes, trackInfo, isClosing }: TrackPopupProps) {
   const { queue, currentQueueIndex, awake } = useAudioPlayer();
   const tracks: Audio[] = trackIndexes.map((x) => {
-    const [series, index] = x.split('-');
+    const [series, idx] = x.split('-');
     const ostSeries = getOstSeries(series);
-    const track = trackInfo[ostSeries].find((y) => y.slice(0, 2).includes(index))!;
+    const track = trackInfo[ostSeries].find((y) => y.slice(0, 2).includes(idx))!;
     return {
       series,
       ostSeries: ostSeries,
@@ -169,9 +170,9 @@ function TrackPopupContent({ trackIndexes, trackInfo, isClosing }: TrackPopupPro
                 </button>
               </td>
               <td>
-                <span>{`${x.titleJP}`}</span>
+                <span>{`${x.titleCN}`}</span>
                 <span>
-                  <small>{x.titleCN}</small>
+                  <small>{x.titleJP}</small>
                 </span>
               </td>
             </tr>

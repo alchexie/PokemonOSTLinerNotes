@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { TITLE } from '../App';
-
-const aboutMd: string = await fetch(`${import.meta.env.BASE_URL}data/about.md`).then(
-  (r) => r.text()
-);
+import { TITLE } from '@/App';
+import text from '@/data/about.md?raw';
 
 export default function About() {
   useEffect(() => {
@@ -13,7 +10,7 @@ export default function About() {
 
   return (
     <article id="doc-viewer">
-      <ReactMarkdown>{aboutMd}</ReactMarkdown>
+      <ReactMarkdown>{text}</ReactMarkdown>
     </article>
   );
 }

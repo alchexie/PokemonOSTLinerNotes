@@ -1,7 +1,7 @@
-import type { ContentGroup } from '../features/doc-content/types';
+import type { ContentSeries } from '@/types';
 import { SERIES_KEYS } from './types';
 
-const loadSeriesBundle = async (ostSeries: string): Promise<ContentGroup> => {
+const loadSeriesBundle = async (ostSeries: string): Promise<ContentSeries> => {
   const res = await fetch(`${import.meta.env.BASE_URL}/data/docs/${ostSeries}.json`);
   const contentType = res.headers.get('content-type');
   if (!contentType || !contentType.includes('application/json')) {
@@ -10,6 +10,6 @@ const loadSeriesBundle = async (ostSeries: string): Promise<ContentGroup> => {
   return res.json();
 };
 
-export const contentLoaders: Record<string, () => Promise<ContentGroup>> = Object.fromEntries(
+export const contentLoaders: Record<string, () => Promise<ContentSeries>> = Object.fromEntries(
   SERIES_KEYS.map((key) => [key, () => loadSeriesBundle(key)])
 );

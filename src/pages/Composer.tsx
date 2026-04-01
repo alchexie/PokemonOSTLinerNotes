@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
-import SeriesTag from '../features/series-tag/SeriesTag';
-import { TITLE } from '../App';
+import SeriesTag from '@/features/series-tag/SeriesTag';
+import { TITLE } from '@/App';
+import composerInfo from '@/data/composer_info.json';
 
-interface Composer {
-  name: string;
-  ost: string[];
-  mark?: 1 | 0;
-  url?: string;
+interface ComposerInfo {
+  message: string;
+  data: {
+    name: string;
+    ost: string[];
+    mark?: 1 | 0;
+    url?: string;
+  }[];
 }
-
-const composerInfo: { message: string; data: Composer[] } = await fetch(
-  `${import.meta.env.BASE_URL}data/composer_info.json`
-).then((res) => res.json());
 
 export default function Composer() {
   const title = '作曲家们';
@@ -23,7 +23,7 @@ export default function Composer() {
   return (
     <article id="doc-viewer">
       <h2>{title}</h2>
-      <p>{composerInfo.message}</p>
+      <p>{(composerInfo as ComposerInfo).message}</p>
       <table>
         <thead>
           <tr>
@@ -32,13 +32,13 @@ export default function Composer() {
           </tr>
         </thead>
         <tbody>
-          {composerInfo.data.map((x, idx) => (
-            <tr key={idx}>
+          {(composerInfo as ComposerInfo).data.map((x) => (
+            <tr key={x.name}>
               <td>
-                <a href={x.url} target="_blank">
+                <a href={x.url} target="_blank" rel="noreferrer">
                   <span
                     style={{
-                      fontWeight: x.mark === 1 ? 'bold' : '',
+                      fontWeight: x.mark === 1 ? 'bold' : undefined,
                       opacity: x.mark === 0 ? 0.3 : 1,
                       whiteSpace: 'nowrap',
                     }}
@@ -49,7 +49,7 @@ export default function Composer() {
               </td>
               <td>
                 {x.ost.map((y) => (
-                  <SeriesTag key={y} type={y} display="inline-block"></SeriesTag>
+                  <SeriesTag key={y} type={y} display="inline-block" />
                 ))}
               </td>
             </tr>

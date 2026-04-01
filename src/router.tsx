@@ -1,16 +1,16 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import DocContent from './features/doc-content/DocContent';
 import RootLayout from './RootLayout';
 import Loading from './features/loading/loading';
 
+const Docs = lazy(() => import('./pages/Docs'));
 const Composer = lazy(() => import('./pages/Composer'));
 const About = lazy(() => import('./pages/About'));
 
 export const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: '',
       element: <RootLayout />,
       children: [
         {
@@ -18,11 +18,15 @@ export const router = createBrowserRouter(
           element: <Navigate to="/docs" />,
         },
         {
-          path: '/docs/:ostSeries?',
-          element: <DocContent />,
+          path: 'docs/:ostSeries?',
+          element: (
+            <Suspense fallback={<Loading></Loading>}>
+              <Docs />
+            </Suspense>
+          ),
         },
         {
-          path: '/composer',
+          path: 'composer',
           element: (
             <Suspense fallback={<Loading></Loading>}>
               <Composer />
@@ -30,7 +34,7 @@ export const router = createBrowserRouter(
           ),
         },
         {
-          path: '/about',
+          path: 'about',
           element: (
             <Suspense fallback={<Loading></Loading>}>
               <About />

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = path.join(__dirname, '..', 'docs');
-const TRACK_INFO_PATH = path.join(__dirname, '..', 'public', 'data', 'track_info.json');
+const TRACK_INFO_PATH = path.join(__dirname, '..', 'src', 'data', 'track_info.json');
 
 const SERIES_TO_OST = {
   PT: 'B2W2',

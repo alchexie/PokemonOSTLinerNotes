@@ -1,19 +1,32 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback, type RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import type { ContentGroup } from '../types';
-import { formatMarkdownContent } from '../utils/formatMarkdownContent';
+import type { ContentSeries } from '@/types';
+import { createTrackPopupTrigger } from '../utils/createTrackPopupTrigger';
 import { useHashScroll } from '../hooks/useHashScroll';
 import { useCopyWithSource } from '../hooks/useCopyWithSource';
-import createTrackPopupTrigger from '../utils/createTrackPopupTrigger';
+import { formatMarkdownContent } from '../utils/formatMarkdownContent';
 
-export default function DocViewer({ current }: { current: ContentGroup }) {
+interface DocViewerProps {
+  current: ContentSeries;
+  contentRef: RefObject<HTMLElement | null>;
+}
+
+export default function DocViewer({ current, contentRef }: DocViewerProps) {
   const component = useMemo(() => createTrackPopupTrigger(current), [current]);
-  const articleRef = useCopyWithSource();
+  const copyRef = useCopyWithSource();
   useHashScroll(current.sections);
 
+  const setRefs = useCallback(
+    (el: HTMLElement | null) => {
+      copyRef.current = el;
+      contentRef.current = el;
+    },
+    [copyRef, contentRef]
+  );
+
   return (
-    <article id="doc-viewer" ref={articleRef}>
+    <article id="doc-viewer" ref={setRefs}>
       {current.sections.map((section) => (
         <section key={section.key}>
           <h2 id={section.key}>{section.title}</h2>

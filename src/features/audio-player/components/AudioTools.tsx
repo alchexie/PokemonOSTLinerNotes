@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 import { getOstSeries } from '@/features/doc-content/utils/getOstSeries';
+import SeriesTag from '@/features/series-tag/SeriesTag';
 
 const baseUrl = import.meta.env.BASE_URL;
 const getIconUrl = (iconName: string): string =>
@@ -79,7 +80,8 @@ export default function AudioTools() {
                   }}
                 >
                   <span>
-                    {x.titleJP}【{x.titleCN}】
+                    <SeriesTag type={x.series}></SeriesTag>
+                    {x.titleCN}
                   </span>
                 </span>
               );

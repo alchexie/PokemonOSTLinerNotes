@@ -1,12 +1,19 @@
-import React from 'react';
-import type { ContentGroup } from '../types';
+import React, { type RefObject } from 'react';
+import type { ContentSeries } from '@/types';
 import { useMobileOverlay } from '@/hooks/useMobileOverlay';
+import { useScrollActive } from '../hooks/useScrollActive';
 
 const baseUrl = import.meta.env.BASE_URL;
 
-export default function MetaInfo({ current }: { current: ContentGroup }) {
+interface MetaInfoProps {
+  current: ContentSeries;
+  contentRef: RefObject<HTMLElement | null>;
+}
+
+export default function MetaInfo({ current, contentRef }: MetaInfoProps) {
   const meta = current.meta;
   const { isOpenOverlay, openOverlay, closeOverlay, refOverlay } = useMobileOverlay();
+  const activeKey = useScrollActive(current, contentRef);
 
   return (
     <aside
@@ -56,17 +63,25 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
         <section className="meta-catalog">
           <nav>
             {current.sections.map((x) => {
+              const isSectionActive =
+                activeKey === x.key || x.files.some((y) => y.key === activeKey);
+
               return (
                 x.key && (
                   <React.Fragment key={x.key}>
                     {x.files.length === 1 && !x.files[0].title ? (
-                      <a href={`#${x.key}`} onClick={closeOverlay} title={x.title}>
+                      <a
+                        href={`#${x.key}`}
+                        onClick={closeOverlay}
+                        title={x.title}
+                        className={isSectionActive ? 'active' : ''}
+                      >
                         {x.title}
                       </a>
                     ) : (
                       <>
                         <details open={current.sections.length === 1}>
-                          <summary>
+                          <summary className={isSectionActive ? 'active' : ''}>
                             <span title={x.title}>{x.title}</span>
                           </summary>
                         </details>
@@ -79,6 +94,7 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
                                   href={`#${y.key}`}
                                   onClick={closeOverlay}
                                   title={y.title}
+                                  className={activeKey === y.key ? 'active' : ''}
                                 >
                                   {y.title}
                                 </a>
