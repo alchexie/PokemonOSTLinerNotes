@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMobileOverlay } from '@/hooks/useMobileOverlay';
-import { CONTENT } from '../doc-content/data';
+import { CONTENT_GROUPS } from '../doc-content/data';
 import { TITLE } from '../../App';
 
 export default function SideNav() {
@@ -9,7 +9,7 @@ export default function SideNav() {
   const { isOpenOverlay, openOverlay, closeOverlay, refOverlay, refTrigger } =
     useMobileOverlay();
 
-  const contentGroups = CONTENT;
+  const contentGroups = CONTENT_GROUPS;
   const others = [
     ['/composer', '作曲家们'],
     ['/about', '关于'],

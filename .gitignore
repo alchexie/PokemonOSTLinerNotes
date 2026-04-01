@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 audio
+public/data/docs
+src/__*.ts

@@ -122,6 +122,45 @@
       }
     }
   }
+
+  > .loading {
+    &:after {
+      content: '......';
+      display: inline-block;
+      margin-left: 0.25em;
+      animation: dots 5s steps(3, end) infinite;
+    }
+
+    @keyframes dots {
+      0% {
+        content: '......';
+      }
+      10% {
+        content: '';
+      }
+      20% {
+        content: '.';
+      }
+      30% {
+        content: '..';
+      }
+      40% {
+        content: '...';
+      }
+      50% {
+        content: '....';
+      }
+      60% {
+        content: '.....';
+      }
+      70% {
+        content: '......';
+      }
+      100% {
+        content: '......';
+      }
+    }
+  }
 }
 
 @media (max-width: 767px) {

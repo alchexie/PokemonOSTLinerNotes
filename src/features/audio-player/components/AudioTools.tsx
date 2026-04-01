@@ -14,9 +14,10 @@ export default function AudioTools() {
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (!toolsRef.current || !visiblePlaylist) return;
+      if (!visiblePlaylist) return;
 
-      if (!toolsRef.current.contains(e.target as Node)) {
+      const audioPlayer = toolsRef.current?.closest('#audio-player');
+      if (!audioPlayer?.contains(e.target as Node)) {
         setVisiblePlaylist(false);
       }
     };
@@ -40,7 +41,7 @@ export default function AudioTools() {
   return (
     <div ref={toolsRef} className="audio-player-tools">
       <button onClick={switchMode}>
-        <img src={getIconUrl(`repeat${mode}`)}></img>
+        <img src={getIconUrl(`repeat${mode}`)} loading="lazy"></img>
       </button>
       <span>|</span>
       <button
@@ -49,16 +50,16 @@ export default function AudioTools() {
           setVisiblePlaylist(!visiblePlaylist);
         }}
       >
-        <img src={getIconUrl('playlist')}></img>
+        <img src={getIconUrl('playlist')} loading="lazy"></img>
       </button>
       <button
         className={`audio-player-tools-volume${mute ? ' mute' : ''} no-hover`}
         onClick={toggleMute}
       >
-        <img src={getIconUrl('volume')}></img>
+        <img src={getIconUrl('volume')} loading="lazy"></img>
       </button>
       <button onClick={close}>
-        <img src={getIconUrl('close')}></img>
+        <img src={getIconUrl('close')} loading="lazy"></img>
       </button>
       <div
         className={`audio-player-playlist${visiblePlaylist ? ' active' : ''}`}

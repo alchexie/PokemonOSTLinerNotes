@@ -91,6 +91,7 @@ function DocImage({
       onClick={handleClick}
       data-clickable={loaded ? 'true' : 'false'}
       {...rest}
+      loading="lazy"
     />
   );
 }

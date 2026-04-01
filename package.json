@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 6004",
+    "dev:docs": "concurrently -k \"pnpm dev\" \"pnpm watch-docs\"",
+    "gen-docs": "rimraf public/data/docs && node scripts/generate-series-bundles.js",
+    "watch-docs": "node scripts/watch-docs.js",
     "build": "rimraf dist && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -25,11 +28,13 @@
     "@types/react-dom": "^19.2.3",
     "@types/serve-static": "^2.2.0",
     "@vitejs/plugin-react": "^5.1.1",
+    "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "rimraf": "^6.1.3",
+    "rollup-plugin-visualizer": "^7.0.1",
     "sass-embedded": "^1.97.3",
     "serve-static": "^2.2.1",
     "typescript": "~5.9.3",

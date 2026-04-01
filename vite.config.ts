@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import serveStatic from 'serve-static';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vite.dev/config/
 const baseUrl = '/pmost/';
@@ -19,6 +20,11 @@ export default defineConfig({
         );
       },
     },
+    visualizer({
+      open: true,
+      gzipSize: true,
+      filename: 'dist/stats.html',
+    }),
   ],
   resolve: {
     alias: {
@@ -36,11 +42,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (!id.includes('node_modules')) return;
           if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
             return 'react';
           }
-          return 'vendor';
+          if (/[\\/]node_modules[\\/](react-markdown|remark|rehype|unified|mdast|hast)/.test(id)) {
+            return 'markdown';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          return;
         },
       },
     },

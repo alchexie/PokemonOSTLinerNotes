@@ -1,80 +1,51 @@
-import fm from 'front-matter';
-import type { ContentGroup, ContentSection, ContentMeta } from './types';
+import type { ContentGroup, ContentMeta } from './types';
+import { contentLoaders } from '@/loaders/content-loaders';
 
-const createContent = (): ContentGroup[] => {
-  const mdModules = import.meta.glob('/docs/**/*.md', {
-    eager: true,
-    query: '?raw',
-    import: 'default',
-  }) as Record<string, string>;
+const loadSeriesMetaList = (): ContentGroup[] => {
   const sectionMetaModules = import.meta.glob('/docs/**/_meta.json', {
     eager: true,
     import: 'default',
   }) as Record<string, ContentMeta>;
-  const groupMetaModules = Object.fromEntries(
+  const seriesMetaModules = Object.fromEntries(
     Object.entries(sectionMetaModules).filter(([key]) => key.split('/').length === 4)
   );
 
-  const groupMap: Map<string, string[]> = new Map(
-    Object.keys(groupMetaModules).map((key) => [key.split('/')[2], []])
-  );
-  Object.keys(mdModules).forEach((path) => {
-    const group = path.split('/docs/')[1].split('/')[0];
-    const current = groupMap.get(group) ?? [];
-    current.push(path);
-    groupMap.set(group, current);
-  });
+  const groups: ContentGroup[] = Object.entries(seriesMetaModules)
+    .map(([metaPath, meta]) => {
+      const folder = metaPath.split('/')[2];
+      return {
+        key: folder.split('-').pop()!,
+        title: meta?.title ?? folder,
+        meta,
+        sections: [],
+      };
+    })
+    .reverse();
 
-  const groups: ContentGroup[] = [...groupMap.entries()].map(([folder, paths]) => {
-    const groupMetaPath = `/docs/${folder}/_meta.json`;
-    const groupMeta = groupMetaModules[groupMetaPath];
-    const sectionMap: Map<string, ContentSection> = new Map<string, ContentSection>();
+  return groups;
+};
+const contentCache = new Map<string, ContentGroup>();
 
-    for (const path of paths) {
-      let [, section, filename] = path.split('/docs/')[1].split('/');
+export const loadContentByOstSeries = async (
+  ostSeries: string
+): Promise<ContentGroup | null> => {
+  if (contentCache.has(ostSeries)) {
+    return contentCache.get(ostSeries)!;
+  }
 
-      if (!filename) {
-        [section, filename] = ['', section];
-      }
+  const loader = contentLoaders[ostSeries];
+  if (!loader) {
+    return null;
+  }
 
-      const current =
-        sectionMap.get(section) ??
-        ({
-          key: section.slice(2),
-          title: section.replace(/^\d+-/, ''),
-          meta: {} as ContentMeta,
-          files: [],
-        } as ContentSection);
-
-      const metaPath = path.replace(/\/[^/]+\.md$/, '/_meta.json');
-      if (sectionMetaModules[metaPath]) {
-        const meta = sectionMetaModules[metaPath];
-        current.title = meta.title;
-        current.meta = meta;
-      }
-
-      const raw = mdModules[path];
-      const { attributes, body } = fm<ContentMeta>(raw);
-      const strKey = filename.replace(/\.md$/, '');
-      current.files.push({
-        key: `${current.key}+${strKey.slice(3)}`,
-        title: attributes.title ?? strKey.replace(/^\d+-/, ''),
-        meta: attributes,
-        content: body,
-      });
-
-      sectionMap.set(section, current);
-    }
-
-    return {
-      key: folder.split('-').pop()!,
-      title: groupMeta?.title ?? folder,
-      meta: groupMeta,
-      sections: [...sectionMap.values()],
-    };
-  });
-
-  return groups.reverse();
+  const content = await loader();
+  contentCache.set(ostSeries, content);
+  return content;
 };
 
-export const CONTENT: ContentGroup[] = createContent();
+export const CONTENT_GROUPS = loadSeriesMetaList().map((meta) => ({
+  key: meta.key,
+  title: meta.title,
+  meta: meta.meta,
+  sections: [],
+})) as ContentGroup[];

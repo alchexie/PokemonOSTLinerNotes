@@ -11,7 +11,7 @@ interface Composer {
 
 const composerInfo: { message: string; data: Composer[] } = await fetch(
   `${import.meta.env.BASE_URL}data/composer_info.json`
-).then((r) => r.json());
+).then((res) => res.json());
 
 export default function Composer() {
   const title = '作曲家们';
@@ -35,7 +35,7 @@ export default function Composer() {
           {composerInfo.data.map((x, idx) => (
             <tr key={idx}>
               <td>
-                <a href={x.url} target='_blank'>
+                <a href={x.url} target="_blank">
                   <span
                     style={{
                       fontWeight: x.mark === 1 ? 'bold' : '',

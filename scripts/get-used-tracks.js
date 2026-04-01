@@ -1,8 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const DOCS_DIR = path.join(__dirname, 'docs');
-const TRACK_INFO_PATH = path.join(__dirname, 'public', 'data', 'track_info.json');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DOCS_DIR = path.join(__dirname, '..', 'docs');
+const TRACK_INFO_PATH = path.join(__dirname, '..', 'public', 'data', 'track_info.json');
 
 const SERIES_TO_OST = {
   PT: 'B2W2',
@@ -47,7 +49,10 @@ function normalizeKey(rawKey, keyIndex) {
   const upper = rawKey.toUpperCase();
   if (SERIES_TO_OST[upper]) {
     const mapped = SERIES_TO_OST[upper];
-    const mappedDirect = keyIndex.get(mapped) || keyIndex.get(mapped.toLowerCase()) || keyIndex.get(mapped.toUpperCase());
+    const mappedDirect =
+      keyIndex.get(mapped) ||
+      keyIndex.get(mapped.toLowerCase()) ||
+      keyIndex.get(mapped.toUpperCase());
     if (mappedDirect) return mappedDirect;
   }
 
@@ -205,7 +210,9 @@ function main() {
         const labelMap = trackLabelMaps.get(normalizedKey);
         const number = parseTrackNumber(item.track, trackMap);
         if (number === null) {
-          warnings.push(`Unknown track "${item.track}" for key "${normalizedKey}" in ${file}`);
+          warnings.push(
+            `Unknown track "${item.track}" for key "${normalizedKey}" in ${file}`
+          );
           continue;
         }
 
@@ -233,12 +240,14 @@ function main() {
       ost: key,
       track_itunes: [...used.get(key)].sort((a, b) => a - b).join(' '),
       tracks_disc: usedDisc.has(key)
-        ? [...usedDisc.get(key)].sort((a, b) => {
-            const an = parseFloat(a);
-            const bn = parseFloat(b);
-            if (Number.isNaN(an) || Number.isNaN(bn)) return a.localeCompare(b);
-            return an - bn;
-          }).join(' ')
+        ? [...usedDisc.get(key)]
+            .sort((a, b) => {
+              const an = parseFloat(a);
+              const bn = parseFloat(b);
+              if (Number.isNaN(an) || Number.isNaN(bn)) return a.localeCompare(b);
+              return an - bn;
+            })
+            .join(' ')
         : '',
       count: used.get(key).size,
     }));
@@ -247,15 +256,17 @@ function main() {
 
   const outputPath = outArg
     ? path.resolve(process.cwd(), outArg)
-    : path.join(__dirname, 'dist', 'used_tracks.json');
+    : path.join(__dirname, '..', 'dist', 'used_tracks.json');
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, JSON.stringify(result, null, 2), 'utf8');
-  console.log(`Wrote ${content.length} OST entries (total ${total} tracks) to ${outputPath}`);
+  console.log(
+    `Wrote ${content.length} OST entries (total ${total} tracks) to ${outputPath}`
+  );
 
   if (warnings.length) {
     console.error(`Warnings (${warnings.length}):`);
     for (const w of warnings) {
-      console.error(`- ${w}`);
+      console.error(`  - ${w}`);
     }
   }
 }

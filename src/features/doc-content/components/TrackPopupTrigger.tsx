@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useAudioPlayer } from '../../audio-player/hooks/useAudioPlayer';
 import type { Audio } from '../../audio-player/types';
 import SeriesTag from '../../series-tag/SeriesTag';
+import { useTrackInfo } from '../hooks/useTrackInfo';
 import { getOstSeries } from '../utils/getOstSeries';
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -26,12 +27,9 @@ interface TrackPopupTriggerProps {
 
 interface TrackPopupProps {
   trackIndexes: string[];
+  trackInfo: Record<string, string[][]>;
   isClosing?: boolean;
 }
-
-const trackInfo: Record<string, string[][]> = await fetch(
-  `${baseUrl}data/track_info.json`
-).then((r) => r.json());
 
 const getPortalContainer = () => {
   const id = 'track-popup-portal';
@@ -55,6 +53,7 @@ export default function TrackPopupTrigger({
   label,
   trackIndexes,
 }: TrackPopupTriggerProps) {
+  const trackInfo = useTrackInfo();
   const { queue, currentQueueIndex } = useAudioPlayer();
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -95,7 +94,7 @@ export default function TrackPopupTrigger({
     if (/^[0-9]+$/.test(index)) {
       return x;
     }
-    return `${ost}-${trackInfo[getOstSeries(ost)].find((y) => index === y[0])![1]}`;
+    return `${ost}-${trackInfo?.[getOstSeries(ost)]?.find((y) => index === y[0])![1] ?? index}`;
   });
 
   return (
@@ -107,7 +106,13 @@ export default function TrackPopupTrigger({
     >
       {foramtTrackIndexes.includes(
         `${currentAudio?.series}-${currentAudio?.indexiTunes}`
-      ) && <img src={musicIconUrl} className="music-icon active hidden-md"></img>}
+      ) && (
+        <img
+          src={musicIconUrl}
+          className="music-icon active hidden-md"
+          loading="lazy"
+        ></img>
+      )}
       {label}
       {isOpen &&
         createPortal(
@@ -116,7 +121,11 @@ export default function TrackPopupTrigger({
             style={{ ...floatingStyles, pointerEvents: 'auto' }}
             {...getFloatingProps()}
           >
-            <TrackPopupContent trackIndexes={foramtTrackIndexes} isClosing={isClosing} />
+            <TrackPopupContent
+              trackIndexes={foramtTrackIndexes}
+              trackInfo={trackInfo!}
+              isClosing={isClosing}
+            />
           </div>,
           getPortalContainer()
         )}
@@ -124,7 +133,7 @@ export default function TrackPopupTrigger({
   );
 }
 
-function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
+function TrackPopupContent({ trackIndexes, trackInfo, isClosing }: TrackPopupProps) {
   const { queue, currentQueueIndex, awake } = useAudioPlayer();
   const tracks: Audio[] = trackIndexes.map((x) => {
     const [series, index] = x.split('-');
@@ -155,6 +164,7 @@ function TrackPopupContent({ trackIndexes, isClosing }: TrackPopupProps) {
                   <img
                     src={musicIconUrl}
                     className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
+                    loading="lazy"
                   ></img>
                 </button>
               </td>

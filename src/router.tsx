@@ -1,8 +1,11 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import DocContent from './features/doc-content/DocContent';
-import Composer from './pages/Composer';
-import About from './pages/About';
 import RootLayout from './RootLayout';
+import Loading from './features/loading/loading';
+
+const Composer = lazy(() => import('./pages/Composer'));
+const About = lazy(() => import('./pages/About'));
 
 export const router = createBrowserRouter(
   [
@@ -20,11 +23,19 @@ export const router = createBrowserRouter(
         },
         {
           path: '/composer',
-          element: <Composer />,
+          element: (
+            <Suspense fallback={<Loading></Loading>}>
+              <Composer />
+            </Suspense>
+          ),
         },
         {
           path: '/about',
-          element: <About />,
+          element: (
+            <Suspense fallback={<Loading></Loading>}>
+              <About />
+            </Suspense>
+          ),
         },
         {
           path: '*',

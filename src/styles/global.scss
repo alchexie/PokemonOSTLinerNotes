@@ -5,15 +5,8 @@ $base-url: '' !default;
 
 :root {
   font-family:
-    'Noto Sans SC',
-    'PingFang SC',
-    'Hiragino Sans GB',
-    'Microsoft YaHei',
-    'Segoe UI',
-    'Roboto',
-    system-ui,
-    -apple-system,
-    sans-serif;
+    -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Microsoft YaHei UI', 'Noto Sans SC', 'Source Han Sans SC', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

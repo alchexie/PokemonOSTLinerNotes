@@ -17,7 +17,10 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
     >
       <div>
         <section className="meta-common">
-          <img src={`${baseUrl}assets/images/content/${current.key}.jpg`} />
+          <img
+            src={`${baseUrl}assets/images/content/${current.key}.jpg`}
+            loading="lazy"
+          />
           <span>{meta.album_cn}</span>
           <table>
             <tbody>
@@ -93,7 +96,7 @@ export default function MetaInfo({ current }: { current: ContentGroup }) {
         </section>
       </div>
       <button className="btn-exit" onClick={closeOverlay}>
-        <img src={`${baseUrl}assets/images/ui/icons/exit.svg`}></img>
+        <img src={`${baseUrl}assets/images/ui/icons/exit.svg`} loading="lazy"></img>
       </button>
     </aside>
   );
