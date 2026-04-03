@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import serveStatic from 'serve-static';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vite.dev/config/
 const baseUrl = '/pmost/';
@@ -20,11 +20,11 @@ export default defineConfig({
         );
       },
     },
-    visualizer({
-      open: true,
-      gzipSize: true,
-      filename: 'dist/stats.html',
-    }),
+    // visualizer({
+    //   open: true,
+    //   gzipSize: true,
+    //   filename: 'dist/stats.html',
+    // }),
   ],
   resolve: {
     alias: {

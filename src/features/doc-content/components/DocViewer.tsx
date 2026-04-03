@@ -1,4 +1,5 @@
-import React, { useMemo, useState, useCallback, type RefObject } from 'react';
+import React, { useCallback, useMemo, useState, type RefObject } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import type { ContentSeries } from '@/types';
@@ -51,16 +52,23 @@ export default function DocViewer({ current, contentRef }: DocViewerProps) {
   );
 }
 
-function DocLink({
-  href,
-  target,
-  rel,
-  ...rest
-}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+function DocLink({ href, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   const isAbsoluteHref = /^http/.test(href ?? '');
-  const finalTarget = isAbsoluteHref ? '_blank' : target;
-  const finalRel = isAbsoluteHref ? 'noopener noreferrer' : rel;
-  return <a href={href} target={finalTarget} rel={finalRel} {...rest} />;
+  if (isAbsoluteHref) {
+    return <a href={href} target="_blank" rel="noopener noreferrer" {...rest} />;
+  } else {
+    const navigate = useNavigate();
+    return (
+      <a
+        href={href}
+        {...rest}
+        onClick={(e) => {
+          e.preventDefault();
+          navigate(href!);
+        }}
+      />
+    );
+  }
 }
 
 function DocImage({
