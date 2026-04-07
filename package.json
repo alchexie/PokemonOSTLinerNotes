@@ -8,7 +8,7 @@
     "dev:docs": "concurrently -k \"pnpm dev\" \"pnpm watch-docs\"",
     "gen-docs": "rimraf public/data/docs && node scripts/generate-series-bundles.js",
     "watch-docs": "node scripts/watch-docs.js",
-    "build": "rimraf dist && tsc -b && vite build",
+    "build": "pnpm gen-docs && rimraf dist && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

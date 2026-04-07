@@ -9,6 +9,9 @@ const baseUrl = '/pmost/';
 
 export default defineConfig({
   base: baseUrl,
+  define: {
+    __BUILD_ID__: JSON.stringify(Date.now().toString()),
+  },
   plugins: [
     react(),
     {
@@ -60,3 +63,4 @@ export default defineConfig({
     host: '0.0.0.0',
   },
 });
+
