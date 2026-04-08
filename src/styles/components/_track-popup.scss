@@ -16,7 +16,7 @@ $track-popup-translateX: -3em;
   position: fixed;
   z-index: 999;
   border: 1px solid var(--nav-active-text-color);
-  padding: 0.75em 1em;
+  padding: 0.75em 0;
   border-radius: 0.5em;
   background-color: var(--nav-bg-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -25,37 +25,42 @@ $track-popup-translateX: -3em;
   transform: translateX($track-popup-translateX);
   animation: fadeIn 0.15s ease;
 
-  table {
-    td {
-      vertical-align: top;
+  > div {
+    max-height: 500px;
+    padding: 0 0.75em;
+    overflow-y: auto;
 
-      span {
+    table {
+      td {
+        vertical-align: top;
         white-space: nowrap;
 
-        small {
-          opacity: 0.5;
+        button {
+          width: 24px;
+          height: 24px;
+          margin: 0 0.25em;
+          background-color: transparent;
+          transition: transform 0.2s ease;
+
+          &:hover {
+            transform: scale(1.5);
+          }
         }
-      }
 
-      button {
-        width: 24px;
-        height: 24px;
-        margin: 0 0.25em;
-        background-color: transparent;
-        transition: transform 0.2s ease;
-
-        &:hover {
-          transform: scale(1.5);
+        &:first-child {
+          text-align: center;
         }
-      }
 
-      &:first-child {
-        text-align: center;
-      }
+        &:last-child {
+          > span {
+            display: block;
+            padding-bottom: 0.1em;
 
-      &:last-child {
-        span {
-          display: block;
+            small {
+              display: block;
+              opacity: 0.5;
+            }
+          }
         }
       }
     }

@@ -145,40 +145,44 @@ function TrackPopupContent({ trackIndexes, trackInfo, isClosing }: TrackPopupPro
       ostSeries: ostSeries,
       indexDisc: track[0],
       indexiTunes: track[1],
-      titleJP: track[2],
       titleCN: track[3],
+      titleJP: track[2],
+      titleEN: track[4],
     };
   });
   const currentAudio = queue[currentQueueIndex];
 
   return (
     <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
-      <table>
-        <tbody>
-          {tracks.map((x, idx) => (
-            <tr key={idx}>
-              <td>
-                <SeriesTag type={x.series}></SeriesTag>
-              </td>
-              <td>
-                <button onClick={() => awake(tracks, idx)}>
-                  <img
-                    src={musicIconUrl}
-                    className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
-                    loading="lazy"
-                  ></img>
-                </button>
-              </td>
-              <td>
-                <span>{`${x.titleCN}`}</span>
-                <span>
-                  <small>{x.titleJP}</small>
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div>
+        <table>
+          <tbody>
+            {tracks.map((x, idx) => (
+              <tr key={idx}>
+                <td>
+                  <SeriesTag type={x.series}></SeriesTag>
+                </td>
+                <td>
+                  <button onClick={() => awake(tracks, idx)}>
+                    <img
+                      src={musicIconUrl}
+                      className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
+                      loading="lazy"
+                    ></img>
+                  </button>
+                </td>
+                <td>
+                  <span>{`${x.titleCN}`}</span>
+                  <span>
+                    <small>{x.titleJP}</small>
+                    <small>{x.titleEN}</small>
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

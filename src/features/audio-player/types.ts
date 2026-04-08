@@ -3,8 +3,9 @@ export interface Audio {
   ostSeries: string;
   indexDisc: string;
   indexiTunes: string;
-  titleJP: string;
   titleCN: string;
+  titleJP: string;
+  titleEN: string;
 }
 
 export interface AudioPlayerState {

@@ -10,7 +10,7 @@ export default function SeriesTag({
   const key = type.toUpperCase();
   const config = SERIES_TAG_COLOR_MAP[key];
   if (!config) {
-    return <span>{type}</span>;
+    return <span className="series-tag">{type}</span>;
   } else {
     return (
       <span

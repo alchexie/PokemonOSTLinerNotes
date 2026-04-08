@@ -199,6 +199,12 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            > .series-tag {
+              display: inline-block!important;
+              width: 5em;
+              text-align: center;
+            }
           }
 
           &:before {
