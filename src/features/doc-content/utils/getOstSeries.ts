@@ -5,7 +5,7 @@ const SERIES_TO_OST: Record<string, string> = {
   RSE: 'RS',
   GS: 'HGSS',
   Y: 'LPLE',
-  RGBY: 'RG',
+  RG: 'RGB',
 };
 
 export const getOstSeries = (input: string): string => {

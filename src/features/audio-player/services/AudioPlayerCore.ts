@@ -1,4 +1,5 @@
 import type { Audio, AudioPlayerState } from '../types';
+import { getTrackInfoFromVgm } from './api';
 
 export class AudioPlayerCore {
   private static instance: AudioPlayerCore | null = null;
@@ -24,16 +25,16 @@ export class AudioPlayerCore {
     this.currentQueueIndex = -1;
   }
 
-  awake(tracks: Audio[], startQueueIndex: number = 0): void {
+  async awake(tracks: Audio[], startQueueIndex: number = 0): Promise<void> {
     this.queue = tracks;
     this.currentQueueIndex = startQueueIndex;
-    this.load(tracks[startQueueIndex]);
+    await this.load(tracks[startQueueIndex]);
     this.audio.play();
   }
 
-  load(track: Audio): void {
-    const { series, indexiTunes } = track;
-    this.audio.src = `${import.meta.env.BASE_URL}audio/${series}/${indexiTunes}.mp3`;
+  async load(track: Audio): Promise<void> {
+    const trackInfo = await getTrackInfoFromVgm(track);
+    this.audio.src = trackInfo.streamUrl;
     this.audio.load();
   }
 
@@ -50,20 +51,21 @@ export class AudioPlayerCore {
     this.audio.currentTime = 0;
   }
 
-  jumpTo(queueIndex: number): void {
+  async jumpTo(queueIndex: number): Promise<void> {
     if (queueIndex === this.currentQueueIndex) return;
-
     this.currentQueueIndex = queueIndex;
-    this.load(this.queue[this.currentQueueIndex]);
+    await this.load(this.queue[this.currentQueueIndex]);
     this.audio.play();
   }
 
-  prev(): void {
-    this.jumpTo((this.currentQueueIndex - 1 + this.queue.length) % this.queue.length);
+  async prev(): Promise<void> {
+    await this.jumpTo(
+      (this.currentQueueIndex - 1 + this.queue.length) % this.queue.length
+    );
   }
 
-  next(): void {
-    this.jumpTo((this.currentQueueIndex + 1) % this.queue.length);
+  async next(): Promise<void> {
+    await this.jumpTo((this.currentQueueIndex + 1) % this.queue.length);
   }
 
   seekTo(time: number): void {

@@ -13,7 +13,7 @@ const SERIES_TO_OST = {
   RSE: 'RS',
   GS: 'HGSS',
   Y: 'LPLE',
-  RGBY: 'RG',
+  RG: 'RGB',
 };
 
 function walkMdFiles(dir) {

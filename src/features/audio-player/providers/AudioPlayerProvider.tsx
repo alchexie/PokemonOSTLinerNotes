@@ -10,15 +10,36 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const sync = () => setState({ ...core.getState() });
-    const handlerNames = ['loadedmetadata', 'play', 'pause', 'timeupdate'];
-    handlerNames.forEach((x) => {
-      core.audio.addEventListener(x, sync);
-    });
+    let rafId: number | null = null;
+    const startRaf = () => {
+      if (rafId == null) {
+        const loop = () => {
+          sync();
+          rafId = window.requestAnimationFrame(loop);
+        };
+        rafId = window.requestAnimationFrame(loop);
+      }
+    };
+    const stopRaf = () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    core.audio.addEventListener('loadedmetadata', sync);
+    core.audio.addEventListener('play', startRaf);
+    core.audio.addEventListener('pause', stopRaf);
+    core.audio.addEventListener('ended', stopRaf);
+
+    if (!core.audio.paused) startRaf();
 
     return () => {
-      handlerNames.forEach((x) => {
-        core.audio.removeEventListener(x, sync);
-      });
+      core.audio.removeEventListener('loadedmetadata', sync);
+      core.audio.removeEventListener('play', startRaf);
+      core.audio.removeEventListener('pause', stopRaf);
+      core.audio.removeEventListener('ended', stopRaf);
+      stopRaf();
     };
   }, []);
 
@@ -32,14 +53,23 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     'seekTo',
     'close',
   ] as const;
+  const methodWrapper = <K extends (typeof methodNames)[number]>(
+    name: K
+  ): AudioPlayerCore[K] =>
+    ((...args: any[]) =>
+      Promise.resolve((core as any)[name](...args)).then(() => {
+        setState({ ...core.getState() });
+      })) as AudioPlayerCore[K];
+
   const handlers: AudioPlayerHandlers = {
-    awake: (tracks: Audio[], startQueueIndex?: number) => {
-      core.awake(tracks, startQueueIndex);
+    awake: async (tracks: Audio[], startQueueIndex?: number) => {
+      await core.awake(tracks, startQueueIndex);
       setState({ ...core.getState() });
     },
-    ...(Object.fromEntries(
-      methodNames.map((x) => [x, (core as any)[x].bind(core)])
-    ) as Pick<AudioPlayerCore, (typeof methodNames)[number]>),
+    ...(Object.fromEntries(methodNames.map((x) => [x, methodWrapper(x)])) as Pick<
+      AudioPlayerCore,
+      (typeof methodNames)[number]
+    >),
     toggleMute: () => {
       core.toggleMute();
       setState({ ...core.getState() });

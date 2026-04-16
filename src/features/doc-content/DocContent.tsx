@@ -19,9 +19,11 @@ export default function DocContent({ ostSeries }: DocContentProps) {
     loadContentByOstSeries(ostSeries)
       .then((data) => {
         setCurrentContent(data);
-        setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, [ostSeries]);

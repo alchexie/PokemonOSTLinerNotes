@@ -49,8 +49,12 @@ function IconButton({ iconName }: { iconName: string }) {
     stop: <rect x="6" y="6" width="12" height="12" />,
   };
 
+  const handleClick = async () => {
+    await (ap as any)[iconName]();
+  };
+
   return (
-    <button onClick={(ap as any)[iconName]}>
+    <button onClick={handleClick}>
       <svg width={24} height={24} viewBox="0 0 24 24" fill="currentColor">
         {icons[iconName]}
       </svg>

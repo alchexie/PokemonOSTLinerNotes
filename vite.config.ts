@@ -48,7 +48,11 @@ export default defineConfig({
           if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
             return 'react';
           }
-          if (/[\\/]node_modules[\\/](react-markdown|remark|rehype|unified|mdast|hast)/.test(id)) {
+          if (
+            /[\\/]node_modules[\\/](react-markdown|remark|rehype|unified|mdast|hast)/.test(
+              id
+            )
+          ) {
             return 'markdown';
           }
           if (id.includes('node_modules')) {
@@ -61,6 +65,12 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
+    proxy: {
+      [`${baseUrl}api`]: {
+        target: 'http://localhost:5005',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(new RegExp(`^${baseUrl}`), '/'),
+      },
+    },
   },
 });
-

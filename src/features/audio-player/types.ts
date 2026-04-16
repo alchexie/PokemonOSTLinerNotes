@@ -19,12 +19,12 @@ export interface AudioPlayerState {
 }
 
 export interface AudioPlayerHandlers {
-  awake: (tracks: Audio[], startQueueIndex?: number) => void;
+  awake: (tracks: Audio[], startQueueIndex?: number) => Promise<void>;
   play: () => void;
   pause: () => void;
   stop: () => void;
-  jumpTo: (queueIndex: number) => void;
-  prev: () => void;
+  jumpTo: (queueIndex: number) => Promise<void>;
+  prev: () => Promise<void>;
   next: () => void;
   seekTo: (time: number) => void;
   toggleMute: () => void;
