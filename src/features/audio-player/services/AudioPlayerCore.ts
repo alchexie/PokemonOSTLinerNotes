@@ -34,6 +34,7 @@ export class AudioPlayerCore {
 
   async load(track: Audio): Promise<void> {
     const trackInfo = await getTrackInfoFromVgm(track);
+    // console.log(trackInfo.title)
     this.audio.src = trackInfo.streamUrl;
     this.audio.load();
   }

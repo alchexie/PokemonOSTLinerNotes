@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState, type RefObject } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import type { ContentSeries } from '@/types';
 import { createTrackPopupTrigger } from '../utils/createTrackPopupTrigger';
 import { useHashScroll } from '../hooks/useHashScroll';
@@ -35,7 +36,7 @@ export default function DocViewer({ current, contentRef }: DocViewerProps) {
             <React.Fragment key={file.key}>
               <h3 id={file.key}>{file.title}</h3>
               <ReactMarkdown
-                rehypePlugins={[rehypeRaw]}
+                rehypePlugins={[rehypeRaw, remarkGfm]}
                 components={{
                   strong: component,
                   a: (props) => <DocLink {...props} />,

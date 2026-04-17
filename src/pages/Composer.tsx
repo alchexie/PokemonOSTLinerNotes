@@ -39,7 +39,7 @@ export default function Composer() {
                   <span
                     style={{
                       fontWeight: x.mark === 1 ? 'bold' : undefined,
-                      opacity: x.mark === 0 ? 0.3 : 1,
+                      opacity: x.mark === 0 ? 0.45 : 1,
                       whiteSpace: 'nowrap',
                     }}
                   >
