@@ -1,5 +1,13 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react';
-import type { Audio, AudioPlayerContextProps, AudioPlayerHandlers } from '../types';
+import {
+  createContext,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+  type ReactNode,
+} from 'react';
+import type { AudioPlayerContextProps, AudioPlayerHandlers } from '../types';
 import { AudioPlayerCore } from '../services/AudioPlayerCore';
 
 export const AudioPlayerContext = createContext<AudioPlayerContextProps | null>(null);
@@ -8,25 +16,26 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
   const core = AudioPlayerCore.getInstance();
   const [state, setState] = useState(core.getState());
 
-  useEffect(() => {
-    const sync = () => setState({ ...core.getState() });
-    let rafId: number | null = null;
-    const startRaf = () => {
-      if (rafId == null) {
-        const loop = () => {
-          sync();
-          rafId = window.requestAnimationFrame(loop);
-        };
-        rafId = window.requestAnimationFrame(loop);
-      }
-    };
-    const stopRaf = () => {
-      if (rafId != null) {
-        window.cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    };
+  const sync = useCallback(() => setState({ ...core.getState() }), [core]);
+  const rafIdRef = useRef<number | null>(null);
+  const startRaf = useCallback(() => {
+    if (rafIdRef.current == null) {
+      const loop = () => {
+        sync();
+        rafIdRef.current = window.requestAnimationFrame(loop);
+      };
+      rafIdRef.current = window.requestAnimationFrame(loop);
+    }
+  }, [sync]);
+  const stopRaf = useCallback(() => {
+    if (rafIdRef.current != null) {
+      window.cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+      sync();
+    }
+  }, [sync]);
 
+  useEffect(() => {
     core.audio.addEventListener('loadedmetadata', sync);
     core.audio.addEventListener('play', startRaf);
     core.audio.addEventListener('pause', stopRaf);
@@ -41,9 +50,10 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       core.audio.removeEventListener('ended', stopRaf);
       stopRaf();
     };
-  }, []);
+  }, [core, startRaf, stopRaf, sync]);
 
   const methodNames = [
+    'awake',
     'play',
     'pause',
     'stop',
@@ -52,33 +62,23 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     'next',
     'seekTo',
     'close',
-  ] as const;
-  const methodWrapper = <K extends (typeof methodNames)[number]>(
-    name: K
-  ): AudioPlayerCore[K] =>
-    ((...args: any[]) =>
-      Promise.resolve((core as any)[name](...args)).then(() => {
-        setState({ ...core.getState() });
-      })) as AudioPlayerCore[K];
-
-  const handlers: AudioPlayerHandlers = {
-    awake: async (tracks: Audio[], startQueueIndex?: number) => {
-      await core.awake(tracks, startQueueIndex);
-      setState({ ...core.getState() });
-    },
-    ...(Object.fromEntries(methodNames.map((x) => [x, methodWrapper(x)])) as Pick<
-      AudioPlayerCore,
-      (typeof methodNames)[number]
-    >),
-    toggleMute: () => {
-      core.toggleMute();
-      setState({ ...core.getState() });
-    },
-    switchMode: () => {
-      core.switchMode();
-      setState({ ...core.getState() });
-    },
-  };
+    'toggleMute',
+    'switchMode',
+  ];
+  const handlers: AudioPlayerHandlers = useMemo(
+    () =>
+      Object.fromEntries(
+        methodNames.map((x) => [
+          x,
+          (...args: any[]) =>
+            Promise.resolve((core as any)[x](...args)).then(() => {
+              setState({ ...core.getState() });
+              if (!core.audio.paused) startRaf();
+            }),
+        ])
+      ) as unknown as AudioPlayerHandlers,
+    [core, startRaf]
+  );
 
   return (
     <AudioPlayerContext.Provider value={{ ...state, ...handlers }}>

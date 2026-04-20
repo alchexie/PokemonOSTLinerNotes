@@ -25,7 +25,7 @@ export interface AudioPlayerHandlers {
   stop: () => void;
   jumpTo: (queueIndex: number) => Promise<void>;
   prev: () => Promise<void>;
-  next: () => void;
+  next: () => Promise<void>;
   seekTo: (time: number) => void;
   toggleMute: () => void;
   switchMode: () => void;

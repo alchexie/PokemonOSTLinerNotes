@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import React, { type ReactNode, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import {
   flip,
@@ -90,13 +90,17 @@ export default function TrackPopupTrigger({
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, dismiss]);
 
   const currentAudio = queue[currentQueueIndex];
-  const foramtTrackIndexes = trackIndexes.map((x) => {
-    const [ost, index] = x.split('-');
-    if (/^[0-9]+$/.test(index)) {
-      return x;
-    }
-    return `${ost}-${(trackInfo as TrackInfo)?.[getOstSeries(ost)]?.find((y) => index === y[0])![1] ?? index}`;
-  });
+  const foramtTrackIndexes = useMemo(
+    () =>
+      trackIndexes.map((x) => {
+        const [ost, index] = x.split('-');
+        if (/^[0-9]+$/.test(index)) {
+          return x;
+        }
+        return `${ost}-${(trackInfo as TrackInfo)?.[getOstSeries(ost)]?.find((y) => index === y[0])![1] ?? index}`;
+      }),
+    [trackIndexes]
+  );
 
   return (
     <strong
@@ -134,52 +138,87 @@ export default function TrackPopupTrigger({
   );
 }
 
+const TrackRow = React.memo(function TrackRow({
+  track,
+  isActive,
+  onPlay,
+}: {
+  track: Audio;
+  isActive: boolean;
+  onPlay: () => void;
+}) {
+  return (
+    <tr>
+      <td>
+        <SeriesTag type={track.series}></SeriesTag>
+      </td>
+      <td>
+        <button onClick={onPlay}>
+          <img
+            src={musicIconUrl}
+            className={`music-icon${isActive ? ' active' : ''}`}
+            loading="lazy"
+          ></img>
+        </button>
+      </td>
+      <td>
+        <span>{`${track.titleCN}`}</span>
+        <span>
+          <small>{track.titleJP}</small>
+          <small>{track.titleEN}</small>
+        </span>
+      </td>
+    </tr>
+  );
+});
+
 function TrackPopupContent({ trackIndexes, trackInfo, isClosing }: TrackPopupProps) {
   const { queue, currentQueueIndex, awake } = useAudioPlayer();
-  const tracks: Audio[] = trackIndexes.map((x) => {
-    const [series, idx] = x.split('-');
-    const ostSeries = getOstSeries(series);
-    const track = trackInfo[ostSeries].find((y) => y.slice(0, 2).includes(idx))!;
-    return {
-      series,
-      ostSeries: ostSeries,
-      indexDisc: track[0],
-      indexiTunes: track[1],
-      titleCN: track[3],
-      titleJP: track[2],
-      titleEN: track[4],
-    };
-  });
+  const tracks: Audio[] = useMemo(
+    () =>
+      trackIndexes.map((x) => {
+        const [series, idx] = x.split('-');
+        const ostSeries = getOstSeries(series);
+        const track = trackInfo[ostSeries].find((y) => y.slice(0, 2).includes(idx))!;
+        return {
+          series,
+          ostSeries,
+          indexDisc: track[0],
+          indexiTunes: track[1],
+          titleCN: track[3],
+          titleJP: track[2],
+          titleEN: track[4],
+        };
+      }),
+    [trackIndexes, trackInfo]
+  );
   const currentAudio = queue[currentQueueIndex];
+  const playCallbacks = useMemo(
+    () => tracks.map((_, i) => () => awake(tracks, i)),
+    [tracks, awake]
+  );
 
   return (
     <div className={`track-popup${isClosing ? ' track-popup-closing' : ''}`}>
       <div>
         <table>
           <tbody>
-            {tracks.map((x, idx) => (
-              <tr key={idx}>
-                <td>
-                  <SeriesTag type={x.series}></SeriesTag>
-                </td>
-                <td>
-                  <button onClick={() => awake(tracks, idx)}>
-                    <img
-                      src={musicIconUrl}
-                      className={`music-icon${currentAudio && currentAudio.ostSeries === x.ostSeries && currentAudio.indexiTunes === x.indexiTunes ? ' active' : ''}`}
-                      loading="lazy"
-                    ></img>
-                  </button>
-                </td>
-                <td>
-                  <span>{`${x.titleCN}`}</span>
-                  <span>
-                    <small>{x.titleJP}</small>
-                    <small>{x.titleEN}</small>
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {tracks.map((x, idx) => {
+              const isActive = !!(
+                currentAudio &&
+                currentAudio.ostSeries === x.ostSeries &&
+                currentAudio.indexiTunes === x.indexiTunes
+              );
+              const onPlay = playCallbacks[idx];
+              return (
+                <TrackRow
+                  key={`${x.ostSeries}-${x.indexiTunes}`}
+                  track={x}
+                  isActive={isActive}
+                  onPlay={onPlay}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>

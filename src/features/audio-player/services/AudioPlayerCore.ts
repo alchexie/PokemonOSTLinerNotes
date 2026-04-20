@@ -73,11 +73,11 @@ export class AudioPlayerCore {
     this.audio.currentTime = time;
   }
 
-  toggleMute() {
+  toggleMute(): void {
     this.audio.volume = +!this.audio.volume;
   }
 
-  switchMode() {
+  switchMode(): void {
     this.mode = (this.mode + 1) % 3;
     if (this._handleEnded) {
       this.audio.removeEventListener('ended', this._handleEnded);
@@ -118,7 +118,7 @@ export class AudioPlayerCore {
     };
   }
 
-  close() {
+  close(): void {
     this.stop();
     this.audio.src = '';
     this.queue = [];
