@@ -1,5 +1,5 @@
 {
-  "message": "这里只列出为宝可梦系列游戏作曲、编曲的名字（以历代作品出现先后顺序排列）。",
+  "message": "这里只列出宝可梦系列游戏中，参与作曲（新曲）、编曲的名字，并以历代作品出现先后顺序排列。",
   "data": [
     {
       "name": "増田順一",
@@ -35,7 +35,8 @@
         "USUM",
         "SWSH",
         "LA",
-        "SV"
+        "SV",
+        "LZA"
       ],
       "mark": 1
     },
@@ -45,7 +46,20 @@
     },
     {
       "name": "佐藤仁美",
-      "ost": ["E", "DPPT", "BW", "B2W2", "XY", "ORAS", "SM", "USUM", "SWSH", "LA", "SV"],
+      "ost": [
+        "E",
+        "DPPT",
+        "BW",
+        "B2W2",
+        "XY",
+        "ORAS",
+        "SM",
+        "USUM",
+        "SWSH",
+        "LA",
+        "SV",
+        "LZA"
+      ],
       "mark": 1
     },
     {
@@ -55,7 +69,7 @@
     },
     {
       "name": "景山将太",
-      "ost": ["HGSS", "BW", "B2W2", "XY", "ORAS", "LPLE", "BDSP"],
+      "ost": ["HGSS", "BW", "B2W2", "XY", "ORAS", "LPLE", "BDSP", "LZA"],
       "mark": 1
     },
     {
@@ -64,12 +78,12 @@
     },
     {
       "name": "足立美奈子",
-      "ost": ["BW", "B2W2", "XY", "ORAS", "SM", "USUM", "SWSH", "SV"],
+      "ost": ["BW", "B2W2", "XY", "ORAS", "SM", "USUM", "SWSH", "SV", "LZA"],
       "mark": 1
     },
     {
-      "name": "谷口辉雄",
-      "ost": ["B2W2", "SV"]
+      "name": "谷口輝雄",
+      "ost": ["B2W2", "SV", "LZA"]
     },
     {
       "name": "黒田英明",
@@ -91,7 +105,7 @@
     },
     {
       "name": "前馬宏充",
-      "ost": ["LA", "SV"]
+      "ost": ["LA", "SV", "LZA"]
     },
     {
       "name": "Toby Fox",
@@ -104,12 +118,32 @@
     },
     {
       "name": "添田悠",
-      "ost": ["SV"],
+      "ost": ["SV", "LZA"],
       "mark": 0
     },
     {
       "name": "村山礼",
-      "ost": ["SV"],
+      "ost": ["SV", "LZA"]
+    },
+    {
+      "name": "細江慎治",
+      "ost": ["LZA"]
+    },
+    {
+      "name": "佐宗綾子",
+      "ost": ["LZA"]
+    },
+    {
+      "name": "江口孝宏",
+      "ost": ["LZA"]
+    },
+    {
+      "name": "Carlos Eiene",
+      "ost": ["LZA"]
+    },
+    {
+      "name": "岡本仁志",
+      "ost": ["LZA"],
       "mark": 0
     }
   ]

@@ -1,4 +1,484 @@
 {
+  "lza": [
+    ["1.01", "1", "プリズムタワーのもとで", "在棱镜塔之下", "Under the Prism Tower"],
+    ["1.02", "2", "車窓から", "从车窗看出去", "From the Train Window"],
+    ["1.03", "3", "駅に到着", "到达南站", "Arrival at the Station"],
+    ["1.04", "4", "ミアレシティ", "密阿雷市", "Lumiose City"],
+    ["1.05", "5", "都市開発計画", "都市开发计划", "Urban Development Plan"],
+    ["1.06", "6", "トラブル発生！？", "出问题了！？", "Trouble Occurs?!"],
+    ["1.07", "7", "勝負をはじめよう！", "对战开始！", "The Z-A Royale Begins!"],
+    ["1.08", "8", "戦闘！トレーナー", "战斗！训练家", "Battle! (Trainer)"],
+    ["1.09", "9", "トレーナーに勝利！", "战胜训练家！", "Victory! (Trainer)"],
+    ["1.10", "10", "レベルがあがった！", "等级提升！", "Level Up!"],
+    ["1.11", "11", "バトルゾーン", "对战特区", "Battle Zone"],
+    ["1.12", "12", "挑戦", "挑战", "Challenge"],
+    ["1.13", "13", "ホテルＺ", "旅馆Z", "Hotel Z"],
+    [
+      "1.14",
+      "14",
+      "たいせつなものを手に入れた！",
+      "获得了重要物品！",
+      "Obtained a Key Item!"
+    ],
+    ["1.15", "15", "エムゼット団リーダー", "超Z队队长", "Leader of Team MZ"],
+    ["1.16", "16", "ひとやすみ", "休息一下", "Take a Break"],
+    ["1.17", "17", "MAIN MISSION START！", "MAIN MISSION START！", "Main Mission Start!"],
+    ["1.18", "18", "エムゼット団の仲間たち", "超Z队的伙伴们", "Members of Team MZ"],
+    ["1.19", "19", "戦闘！エムゼット団", "战斗！超Z队", "Battle! (Team MZ)"],
+    ["1.20", "20", "ポケモンセンター", "宝可梦中心", "Pokémon Center"],
+    ["1.21", "21", "回復", "回复", "Pokémon Healed"],
+    ["1.22", "22", "どうぐを手に入れた！", "获得了道具！", "Obtained an Item!"],
+    ["1.23", "23", "ワイルドゾーン", "野生特区", "Wild Zone"],
+    [
+      "1.24",
+      "24",
+      "戦闘！ワイルドゾーンのポケモン",
+      "战斗！野生特区的宝可梦",
+      "Battle! (Wild Zone Wild Pokémon)"
+    ],
+    ["1.25", "25", "ポケモンを捕まえた！！", "捉到了宝可梦！！", "You caught a Pokémon!"],
+    ["1.26", "26", "ポケモン研究所", "宝可梦研究所", "Pokémon Research Lab"],
+    ["1.27", "27", "わざマシンを手に入れた！", "获得了招式学习器！", "Obtained a TM!"],
+    [
+      "1.28",
+      "28",
+      "MAIN MISSION COMPLETE!",
+      "MAIN MISSION COMPLETE!",
+      "Main Mission Complete!"
+    ],
+    [
+      "1.29",
+      "29",
+      "戦闘！強いトレーナー",
+      "战斗！强大的训练家",
+      "Battle! (Stronger Trainer)"
+    ],
+    ["1.30", "30", "ランクアップ！", "升级！", "Rank Up!"],
+    ["1.31", "31", "マチエール", "玛琪艾儿", "Emma"],
+    ["1.32", "32", "みんなで食事", "一起吃饭", "Eating Together"],
+    ["1.33", "33", "きのみを手に入れた！", "获得了树果", "Obtained a Berry!"],
+    ["1.34", "34", "ハンサムハウス", "帅哥侦探事务所", "Looker Bureau"],
+    ["1.35", "35", "SIDE MISSION START!", "SIDE MISSION START!", "Side Mission Start!"],
+    [
+      "1.36",
+      "36",
+      "戦闘！ワイルドゾーンのオヤブン",
+      "战斗！野生特区的头目",
+      "Battle! (Wild Zone Alpha Pokémon)"
+    ],
+    ["1.37", "37", "敗北", "败北", "Defeat"],
+    ["1.38", "38", "進化", "进化", "Evolution"],
+    [
+      "1.39",
+      "39",
+      "進化おめでとう！",
+      "恭喜，进化成功！",
+      "Congratulations! Your Pokémon Evolved!"
+    ],
+    ["1.40", "40", "カフェでひといき", "在咖啡馆里放松一下", "Take a Break at the Café!"],
+    ["1.41", "41", "撮影・マーチ", "拍照・进行", "Photo (March)"],
+    ["1.42", "42", "撮影・勝負", "拍照・对战", "Photo (Battle)"],
+    ["1.43", "43", "撮影・こもりうた", "拍照・摇篮歌", "Photo (Lullaby)"],
+    [
+      "1.44",
+      "44",
+      "SIDE MISSION COMPLETE!",
+      "SIDE MISSION COMPLETE!",
+      "Side Mission Complete!"
+    ],
+
+    ["2.01", "45", "ミアレシティ（夜）", "密阿雷市（夜）", "Lumiose City (Night)"],
+    ["2.02", "46", "レストラン", "餐馆", "Restaurant"],
+    ["2.03", "47", "警告", "警告", "Warning"],
+    [
+      "2.04",
+      "48",
+      "戦闘！暴走メガシンカ",
+      "战斗！失控超级进化",
+      "Battle! (Rogue Mega Pokémon)"
+    ],
+    ["2.05", "49", "メガストーン", "超级石", "Mega Stone"],
+    [
+      "2.06",
+      "50",
+      "メガストーンを手に入れた！",
+      "获得了超级石！",
+      "Obtained a Mega Stone!"
+    ],
+    ["2.07", "51", "クエーサー社の使命", "阔星公司的使命", "Quasartico Inc's Mission"],
+    ["2.08", "52", "クエーサー社", "阔星公司", "Quasartico Inc."],
+    ["2.09", "53", "みんなで作戦会議", "一起举行作战会议", "Strategy Meeting Time"],
+    [
+      "2.10",
+      "54",
+      "戦闘！ジガルデ１０％",
+      "战斗！基格尔德10%",
+      "Battle! (Zygarde 10% Forme)"
+    ],
+    ["2.11", "55", "F", "F", "L"],
+    ["2.12", "56", "D・G・4！", "来・电・伍！", "Let's Go, DYN4M0"],
+    [
+      "2.13",
+      "57",
+      "カラフルなネジを手に入れた！",
+      "获得了彩色螺丝！",
+      "Obtained a Colorful Screw!"
+    ],
+    ["2.14", "58", "ラシーヌ工務店", "木根工程", "Racine Construction"],
+    ["2.15", "59", "戦闘！カナリィ", "战斗！卡娜莉", "Battle! (Canari)"],
+    [
+      "2.16",
+      "60",
+      "ジャスティスの会シロー",
+      "正义社的皙白",
+      "Ivor of the Fist of Justice"
+    ],
+    ["2.17", "61", "地下水道", "下水道", "The Sewers"],
+    [
+      "2.18",
+      "62",
+      "戦闘！地下水道のポケモン",
+      "战斗！下水道的宝可梦",
+      "Battle! (Sewers Wild Pokémon)"
+    ],
+    [
+      "2.19",
+      "63",
+      "戦闘！地下水道のオヤブン",
+      "战斗！下水道的头目",
+      "Battle! (Sewers Alpha Pokémon)"
+    ],
+    ["2.20", "64", "戦闘！シロー", "战斗！皙白", "Battle! (Ivor)"],
+    ["2.21", "65", "緊張", "紧张", "Tension"],
+    ["2.22", "66", "サビ組事務所", "锈蚀组事务所", "Rust Syndicate Office"],
+    ["2.23", "67", "サビ組カラスバ", "锈蚀组的乌羽", "Corbeau of the Rust Syndicate"],
+    ["2.24", "68", "戦闘！カラスバ", "战斗！乌羽", "Battle! (Corbeau)"],
+    ["2.25", "69", "ＭＳＢＣユカリ", "MSBC的由紫", "Jacinthe of the SBC"],
+    [
+      "2.26",
+      "70",
+      "戦闘！ジガルデ５０％",
+      "战斗！基格尔德50%",
+      "Battle! (Zygarde 50% Forme)"
+    ],
+    ["2.27", "71", "戦闘！ユカリ", "战斗！由紫", "Battle! (Jacinthe)"],
+
+    ["3.01", "72", "フレア団ヌーヴォ", "新闪焰队", "Team Flare Nouveau"],
+    ["3.02", "73", "フラダリラボ", "弗拉达利研究所", "Lysandre Labs"],
+    [
+      "3.03",
+      "74",
+      "戦闘！ フラダリラボのポケモン",
+      "战斗！弗拉达利研究所的宝可梦",
+      "Battle! (Lysandre Labs Wild Pokémon)"
+    ],
+    [
+      "3.04",
+      "75",
+      "戦闘！ フラダリラボのオヤブン",
+      "战斗！弗拉达利研究所的头目",
+      "Battle! (Lysandre Labs Alpha Pokémon)"
+    ],
+    ["3.05", "76", "檻の記憶", "笼子的记忆", "Memories of a Prison"],
+    [
+      "3.06",
+      "77",
+      "戦闘！ フレア団ヌーヴォ",
+      "战斗！新闪焰队",
+      "Battle! (Team Flare Nouveau)"
+    ],
+    ["3.07", "78", "ランク：Aにランクアップ！", "升到级别：A！", "Reached Rank A!"],
+    ["3.08", "79", "プリズムタワーの異変", "棱镜塔的异变", "Anomaly at Prism Tower"],
+    [
+      "3.09",
+      "80",
+      "真剣勝負！エムゼット団",
+      "一决胜负！超Z队",
+      "Serious Showdown Battle! (Team MZ)"
+    ],
+    ["3.10", "81", "AZの思い", "AZ的心意", "AZ's Thoughts"],
+    [
+      "3.11",
+      "82",
+      "フラエッテとプリズムタワーへ",
+      "跟花叶蒂前往棱镜塔",
+      "To the Prism Tower with Floette"
+    ],
+    ["3.12", "83", "制御", "控制", "Control Room"],
+    ["3.13", "84", "暴走", "失控", "Rampage"],
+    ["3.14", "85", "異変のミアレシティ", "异变中的密阿雷市", "Lumiose City in Crisis"],
+    [
+      "3.15",
+      "86",
+      "戦闘！ 異変のミアレシティ",
+      "战斗！异变中的密阿雷市",
+      "Battle! (Lumiose City in Crisis)"
+    ],
+    ["3.16", "87", "パーフェクトジガルデ", "完全体基格尔德", "Zygarde Complete Forme"],
+    [
+      "3.17",
+      "88",
+      "決戦！超大暴走アンジュフラエ",
+      "决战！超激失控昂主花叶蒂",
+      "Decisive Battle! (Hyper Rogue Ange Floette)"
+    ],
+    ["3.18", "89", "再暴走", "再失控", "Another Rampage"],
+    ["3.19", "90", "メガジガルデ", "超级基格尔德", "Mega Zygarde"],
+    ["3.20", "91", "無に帰す光", "归无之光", "Nihil Light"],
+    ["3.21", "92", "KISEKI-reprise-", "KISEKI-reprise-", "KISEKI - Reprise"],
+    ["3.22", "93", "おやすみなさい", "晚安", "Goodnight"],
+    ["3.23", "94", "通信対戦！", "连线对战！", "Ranked Battle!"],
+    ["3.24", "95", "通信対戦結果", "连线对战结果", "Battle Results"],
+    [
+      "3.25",
+      "96",
+      "ランクバトルでランクアップ！",
+      "在级别对战升级！",
+      "Rank Up! (Ranked Battle)"
+    ],
+    ["3.26", "97", "お誕生日おめでとう！", "生日快乐！", "Happy Birthday!"],
+    ["3.27", "98", "戦闘！ フラダリ", "战斗！弗拉达利", "Battle! (Lysandre)"],
+    [
+      "3.28",
+      "99",
+      "戦闘！ パーフェクトジガルデ",
+      "战斗！完全体基格尔德",
+      "Battle! (Zygarde Complete Forme)"
+    ],
+
+    ["4.01", "100", "M次元ラッシュ", "超次元爆涌", "Mega Dimension"],
+    ["4.02", "101", "アンシャ", "安馨儿", "Ansha"],
+    ["4.03", "102", "アンシャのドーナツ屋", "安馨儿的甜甜圈店", "Ansha's Donut Shop"],
+    ["4.04", "103", "ドーナツ完成！", "甜甜圈完成！", "The Donuts Are Ready!"],
+    ["4.05", "104", "いじげんホール", "异次元洞", "Hyperspace Distortion"],
+    ["4.06", "105", "異次元ミアレ", "异次元密阿雷", "Hyperspace Lumiose"],
+    [
+      "4.07",
+      "106",
+      "戦闘！異次元ミアレのポケモン",
+      "战斗！异次元密阿雷的宝可梦",
+      "Battle! (Hyperspace Lumiose Wild Pokémon)"
+    ],
+    [
+      "4.08",
+      "107",
+      "DIM MISSION START!",
+      "DIM MISSION START!",
+      "Mega Dimension Mission Start!"
+    ],
+    ["4.09", "108", "継承者コルニ", "继承者可尔妮", "Successor Korrina"],
+    [
+      "4.10",
+      "109",
+      "戦闘！異次元ミアレのオヤブン",
+      "战斗！异次元密阿雷的头目",
+      "Battle! (Hyperspace Lumiose Alpha Pokémon)"
+    ],
+    [
+      "4.11",
+      "110",
+      "DIM MISSION COMPLETE!",
+      "DIM MISSION COMPLETE!",
+      "Mega Dimension Mission Complete!"
+    ],
+    ["4.12", "111", "メガドーナツ大作戦", "超级甜甜圈大作战", "Operation Mega Donut"],
+    ["4.13", "112", "名残", "痕迹", "Remnant"],
+    [
+      "4.14",
+      "113",
+      "戦闘！ 暴走メガダークライ",
+      "战斗！失控超级达克莱伊",
+      "Battle! (Rogue Mega Darkrai)"
+    ],
+    [
+      "4.15",
+      "114",
+      "きみとゆく-reprise-",
+      "与你同行-reprise-",
+      "I'll Go With You - Reprise"
+    ],
+    [
+      "4.16",
+      "115",
+      "べにいろのたま・あいいろのたま",
+      "朱红色宝珠·靛蓝色宝珠",
+      "Red Orb / Blue Orb"
+    ],
+    ["4.17", "116", "たまを手に入れた！", "获得了宝珠！", "Obtained an Orb!"],
+    ["4.18", "117", "レックウザ光臨！", "烈空坐光临！", "Rayquaza Appears!"],
+    [
+      "4.19",
+      "118",
+      "戦闘！ 暴走メガレックウザ",
+      "战斗！失控超级烈空坐",
+      "Battle! (Rogue Mega Rayquaza)"
+    ],
+    ["4.20", "119", "最高の贈りもの", "最棒的礼物", "The Best Gift"],
+    ["4.21", "120", "アンシャの物語", "安馨儿的故事", "Ansha's Story"],
+    [
+      "4.22",
+      "121",
+      "ミアレシティ（ルージュ地区）",
+      "密阿雷市（榴红区）",
+      "Lumiose City (Rouge District)"
+    ],
+    [
+      "4.23",
+      "122",
+      "ミアレシティ（ブルー地区）",
+      "密阿雷市（浦蓝区）",
+      "Lumiose City (Bleu District)"
+    ],
+    [
+      "4.24",
+      "123",
+      "ミアレシティ（ローズ地区）",
+      "密阿雷市（蓉粉区）",
+      "Lumiose City (Magenta District)"
+    ],
+    [
+      "4.25",
+      "124",
+      "ミアレシティ（ジョーヌ地区）",
+      "密阿雷市（琼黄区）",
+      "Lumiose City (Jaune District)"
+    ],
+    [
+      "4.26",
+      "125",
+      "戦闘！ ワイルドゾーンのポケモン（version 2）",
+      "战斗！野生特区的宝可梦（version 2）",
+      "Battle! (Wild Zone Wild Pokémon Version 2)"
+    ],
+    [
+      "4.27",
+      "126",
+      "戦闘！ ワイルドゾーンのポケモン（version 3）",
+      "战斗！野生特区的宝可梦（version 3）",
+      "Battle! (Wild Zone Wild Pokémon Version 3)"
+    ],
+    [
+      "4.28",
+      "127",
+      "戦闘！ ワイルドゾーンのポケモン （version 4）",
+      "战斗！野生特区的宝可梦（version 4）",
+      "Battle! (Wild Zone Wild Pokémon Version 4)"
+    ],
+    [
+      "4.29",
+      "128",
+      "戦闘！ ワイルドゾーンのポケモン （version 5）",
+      "战斗！野生特区的宝可梦（version 5）",
+      "Battle! (Wild Zone Wild Pokémon Version 5)"
+    ],
+    [
+      "4.30",
+      "129",
+      "戦闘！ ワイルドゾーンのポケモン （version 6）",
+      "战斗！野生特区的宝可梦（version 6）",
+      "Battle! (Wild Zone Wild Pokémon Version 6)"
+    ],
+    [
+      "4.31",
+      "130",
+      "戦闘！ ワイルドゾーンのオヤブン （version 2）",
+      "战斗！野生特区的头目（version 2）",
+      "Battle! (Wild Zone Alpha Pokémon Version 2)"
+    ],
+    [
+      "4.32",
+      "131",
+      "戦闘！ ワイルドゾーンのオヤブン （version 3）",
+      "战斗！野生特区的头目（version 3）",
+      "Battle! (Wild Zone Alpha Pokémon Version 3)"
+    ],
+    [
+      "4.33",
+      "132",
+      "戦闘！ ワイルドゾーンのオヤブン （version 4）",
+      "战斗！野生特区的头目（version 4）",
+      "Battle! (Wild Zone Alpha Pokémon Version 4)"
+    ],
+    [
+      "4.34",
+      "133",
+      "戦闘！ ワイルドゾーンのオヤブン （version 5）",
+      "战斗！野生特区的头目（version 5）",
+      "Battle! (Wild Zone Alpha Pokémon Version 5)"
+    ],
+    [
+      "4.35",
+      "134",
+      "戦闘！ ワイルドゾーンのオヤブン （version 6）",
+      "战斗！野生特区的头目（version 6）",
+      "Battle! (Wild Zone Alpha Pokémon Version 6)"
+    ],
+
+    ["5.01", "135", "ブティック", "时装店", "Boutique"],
+    ["5.02", "136", "サロン・ド・ロージュ", "包厢沙龙", "Coiffure Clips"],
+    [
+      "5.03",
+      "137",
+      "レストラン ローリングドリーマー",
+      "回转梦想家高级餐厅",
+      "Sushi High Roller"
+    ],
+    [
+      "5.04",
+      "138",
+      "グランドホテル シュールリッシュ",
+      "秀丽世大酒店",
+      "Hotel Richissime"
+    ],
+    ["5.05", "139", "暗雲", "暗云", "Dark Skies"],
+    ["5.06", "140", "AZ", "AZ", "AZ"],
+    [
+      "5.07",
+      "141",
+      "戦闘！ ゼルネアス・イベルタル",
+      "战斗！哲尔尼亚斯与伊裴尔塔尔",
+      "Battle! (Xerneas / Yveltal)"
+    ],
+    ["5.08", "142", "戦闘！ ミュウツー", "战斗！超梦", "Battle! (Mewtwo)"],
+    [
+      "5.09",
+      "143",
+      "戦闘！継承者コルニ",
+      "战斗！继承者可尔妮",
+      "Battle! (Successor Korrina)"
+    ],
+    [
+      "5.10",
+      "144",
+      "戦い：すごいポケモン",
+      "战斗：很厉害的宝可梦",
+      "Battle! (Remarkable Pokémon)"
+    ],
+    [
+      "5.11",
+      "145",
+      "戦闘！超古代ポケモン",
+      "战斗！超古代宝可梦",
+      "Battle! (Super-Ancient Pokémon)"
+    ],
+    [
+      "5.12",
+      "146",
+      "戦闘！ ゲンシカイキ / ゲンシカイキに勝利！",
+      "战斗！原始回归 / 战胜原始回归！",
+      "Battle! (Primal Reversion) / Victory! (Primal Reversion)"
+    ],
+    ["5.13", "147", "流星哀歌", "流星哀歌", "The Lament of Falling Stars"],
+    ["5.14", "148", "戦闘！ 野生ポケモン", "战斗！野生宝可梦", "Battle! (Wild Pokémon)"],
+    [
+      "5.15",
+      "149",
+      "戦闘！ 伝説のポケモン",
+      "战斗！传说的宝可梦",
+      "Battle! (Legendary Pokémon)"
+    ],
+    ["5.16", "150", "ふしぎなおくりもの", "神秘礼物", "Mystery Gift"]
+  ],
   "sv": [
     [
       "1.01",
@@ -2582,7 +3062,7 @@
       "最终兵器，发射（Ｙ）",
       "Firing the Ultimate Weapon (Pokémon Y)"
     ],
-    ["3.14", "108", "AZ", "ＡＺ", "AZ"],
+    ["3.14", "108", "AZ", "AZ", "AZ"],
     ["3.15", "109", "18番道路", "１８号道路", "Route 18"],
     [
       "3.16",
