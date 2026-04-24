@@ -10,7 +10,17 @@ export default function About() {
 
   return (
     <article id="doc-viewer">
-      <ReactMarkdown>{text}</ReactMarkdown>
+      <ReactMarkdown
+        components={{
+          a: ({ href, children, ...props }) => (
+            <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+              {children}
+            </a>
+          ),
+        }}
+      >
+        {text}
+      </ReactMarkdown>
     </article>
   );
 }
